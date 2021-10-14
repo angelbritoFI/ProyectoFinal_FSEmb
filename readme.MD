@@ -12,8 +12,5 @@ Repositorio para los entregables del proyecto final de la materia de Fundamentos
 ### Profesor
 *M. en C. José Mauricio Matamoros de María y Campos*
 
-***
 ---
-___
-
 ### Facultad de Ingeniería, UNAM - Semestre 2022-1
