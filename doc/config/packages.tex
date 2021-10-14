@@ -1,0 +1,52 @@
+% %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Materia: Fundamentos de Sistemas Embebidos
+% Fecha de creación: DD/MM/2021
+% Descripción: Lista de paquetes requeridos
+% Hecho por:
+%	Brito Segura Angel
+%	Tovar Herrera Carlos Eduardo
+%	Zazueta Barájas Sebastián Pedro
+% %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Archivo principal de LaTeX
+%!TEX root = ../main.tex
+
+\usepackage[utf8]{inputenc} %Decodificación del documento
+\usepackage[T1]{fontenc} %Agregar LATIN1 para todas las lenguas romances aceptadas
+\usepackage[spanish,mexico]{babel} %Traducir a español mexicano, opción es-lcroman para minúsculas las letras romanas en numeraciones
+\usepackage{fullpage} %Paquete para margen de la página
+\usepackage{fancyhdr} %Cambiar pie de página y encabezados
+\usepackage{lastpage} %Obtener número de páginas
+\usepackage[usenames,dvipsnames]{xcolor} %Tener variedad de colores
+
+%Referencias en el documento
+\usepackage{varioref} %ya no se ocupa pero es necesario para los siguientes
+\usepackage{hyperref} %habilitar hipervínculos y modificarlos
+\usepackage[noabbrev,nameinlink,spanish]{cleveref} %generar referencias (no abreviar la referencia, link en el nombre de la referencia y número, en español)
+
+% Forma recomendada de citar
+\usepackage[square, comma, numbers, sort&compress]{natbib} %De acuerdo a la IEEE
+%Otra forma de citar
+%\usepackage[backend=biber, style=apa]{biblatex} %Importar la bibliografía con su estilo
+%\addbibresource{referencias.bib} %Importar el archivo con la bibliografía
+
+\usepackage[inline]{enumitem} %Opciones de espacio y en línea para viñetas
+
+\usepackage{float} %Tablas flotantes (se recomienda así) e imágenes
+
+\usepackage{csquotes} %Realiza diferentes tipos de citas
+
+%Uso de tablas
+\usepackage{booktabs} %Tablas elegantes y profesionales
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage{multirow} %Muy rara vez se requiere
+
+\usepackage{caption} %Nos da más opciones en los captions
+
+% Manejo de imágenes
+\usepackage{graphicx} %Utilizar imágenes
+\usepackage{wrapfig} %Permitir imágenes a un lado del texto
+
+\usepackage{ragged2e} %Diferentes tipos de alineado
+
+\usepackage{listings} %Para introducir código fuente

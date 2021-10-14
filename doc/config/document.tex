@@ -1,0 +1,37 @@
+% %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Materia: Fundamentos de Sistemas Embebidos
+% Fecha de creación: DD/MM/2021
+% Descripción: Configuración de página y documento en general
+% Hecho por:
+%	Brito Segura Angel
+%	Tovar Herrera Carlos Eduardo
+%	Zazueta Barájas Sebastián Pedro
+% %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Archivo principal de LaTeX
+%!TEX root = ../main.tex
+
+\makeatletter %Utilizar referencias con @
+%Configuración de los hipervínculos y metadatos del PDF
+\hypersetup {
+	hidelinks,
+	colorlinks=true,
+	linkcolor=Black, %pone negro a la referencia de página, ver si no afecta en otros lados
+	filecolor=OliveGreen, %\href{run:./file.txt}{File.txt}
+	urlcolor=RoyalPurple,
+	citecolor=Blue,
+	pdfauthor={\@author},
+	pdftitle={\@title},
+%	pdfpagemode=FullScreen,
+	pdfsubject={Fundamentos de Sistemas Embebidos},
+	pdfkeywords={},
+	pdfproducer={SublimeText3 con Makefile (Ubuntu)},
+	pdfcreator={pdflatex, rubber}
+}
+\makeatother %Regresar a la configuración normal
+
+%Cambiar el nombre de la refencia dada: tipo, en sigular, en plural
+\crefname{section}{sección}{secciones}
+\Crefname{section}{Sección}{Secciones}
+%Agregar los que sean necesarios cambiar a los que trae por defecto
+\crefname{equation}{fórmula}{fórmulas}
+\Crefname{equation}{Fórmula}{Fórmulas}
