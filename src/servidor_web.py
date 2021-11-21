@@ -45,7 +45,7 @@ class WebServer(BaseHTTPRequestHandler):
 			print("Datos JSON incorrectos")
 			return
 		print("\tSistema de", json_obj['action'], "con un valor de", json_obj['value'])
-		#output += '<a href="/new/%s">' % variable
+		# salida = 'document.getElementById("prueba").innerHTML=%s;' % json_obj['action']
 
 	"""Sirve el archivo de interfaz de usuario"""
 	def _serve_ui_file(self):
@@ -101,7 +101,7 @@ class WebServer(BaseHTTPRequestHandler):
 		except:
 			print(sys.exc_info())
 			print("Datos POST no recnocidos")
-
+		
 def main():
 	# Inicializa una nueva instancia de HTTPServer con el
 	# HTTPRequestHandler definido en este archivo
