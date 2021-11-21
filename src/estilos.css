@@ -1,0 +1,21 @@
+/*
+	Authors:
+	 	Brito Segura Angel
+	 	Tovar Herrera Carlos Eduardo
+		Zazueta Barájas Sebastián Pedro
+	License: MIT
+	Version 1.0
+	Date: 20/11/2021
+	Description: Estilos de la página principal
+*/
+body {
+	background-color: green;
+}
+h1 {
+ 	color: #FFCC99; /* Color carne */
+ 	font-size: 36px;
+ 	text-align: center;
+}
+h2 {
+	color: red;
+}
