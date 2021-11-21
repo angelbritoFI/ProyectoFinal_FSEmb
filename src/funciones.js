@@ -10,6 +10,10 @@
 */
 function handle(sender, action, value){
 	submit(action, value);
+	if (value == 'on')
+		alert("Sistema de irrigación encendiendo");
+	else
+		alert("Sistema de irrigación apagándose");
 }
 
 function submit(action, value){
