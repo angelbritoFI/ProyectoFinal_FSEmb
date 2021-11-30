@@ -1,2 +1,8 @@
 #Tutorial hecho individualmente
 tutorial/
+
+#Archivo PDF
+*.pdf
+
+#Referencias a librerías LaTeX
+*.bst

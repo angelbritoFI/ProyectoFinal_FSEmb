@@ -32,8 +32,3 @@ launch:
 	mv $(PREFIX).pdf $(FILE).pdf
 	#gnome-open
 	$(SILENT) xdg-open $(FILE).pdf &> /dev/null &
-
-#Este archivo es para compilar desde sublime con Ctrl+B
-# Se tiene que crear Tools -> Build System -> New Build System, agregar , "keyfiles": ["Makefile"], para primera vez
-# Una vez guardado, se elige el nombre que se quiera que aparezca en SublimeText
-

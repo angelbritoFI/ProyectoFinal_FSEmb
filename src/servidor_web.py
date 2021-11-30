@@ -7,13 +7,18 @@
 # Version 1.1
 # Date: 21/11/2021
 # Description: Servidor web para control de invernadero
+
+# Paquetes para crear el servidor web
 import os
 import sys
 import json
 import magic
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
+# Control del Sistema de Invernadero
 from invernadero import *
+# 
+from threading import Thread
 
 # Nombre o direccion IP del sistema anfitrion del servidor web
 address = "localhost"
@@ -111,8 +116,9 @@ class WebServer(BaseHTTPRequestHandler):
 			# Se descartan cadenas de datos mal formados
 			print(sys.exc_info())
 			print("Datos POST no recnocidos")
-		
-def main():
+
+#Inicializar el procesador
+def server():
 	# Inicializa una nueva instancia de HTTPServer con el HTTPRequestHandler definido
 	webServer = HTTPServer((address, port), WebServer)
 	print("Servidor iniciado")
@@ -130,6 +136,13 @@ def main():
 	# Reporta parada del servidor web en consola
 	print("\nServidor detenido.")
 
-# Punto de anclaje de la función main
+#Control de hilos para servidor web y simulador
+def main():
+	hilo1 = Thread(target=server)
+	hilo2 = Thread(target=simulador)
+	hilo1.start()
+	hilo2.start()
+	
+# Punto de anclaje de la función principal
 if __name__ == "__main__":
 	main()
