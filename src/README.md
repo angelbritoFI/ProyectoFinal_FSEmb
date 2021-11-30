@@ -5,6 +5,7 @@
 | Versión | Descripción | Fecha |
 | -- | -- | -- |
 | 1.0 | Incorporación de primera función | 21/11/21 |
+| 1. |  |  |
 
 ## Código servidor_web.py
 | Versión | Descripción | Fecha |
