@@ -18,8 +18,29 @@
 <body>
 	<h1>Control de Invernadero</h1>
 	<h2>Sistema de Irrigación</h2>
-	<button onclick="handle(this, 'irrigacion', 'on')">Encender</button>
-	<button onclick="handle(this, 'irrigacion', 'off')">Apagar</button>
+	<button id="irrigacionON" onclick="handle(this, 'irrigacion', 'on')">Encender</button>
+	<button id="irrigacionOFF" onclick="handle(this, 'irrigacion', 'off')">Apagar</button>
+	<p id="sistema_irr"></p> 
+	<br>
+	<p>Introduce la temperatura para el invernadero:
+		<input type="number" id="temperatura" min="0" value="0">
+		<button onclick="handle(this, 'temperatura', 'estado_temp')">Enviar temperatura</button>
+	</p>
+	<div>Valor de temperatura: <span id="estado_temp">0</span>°C</div>
+	<br>
+	<p>Introduce la potencia del radiador:
+		<input type="number" id="radiador" min="0" value="0">
+		<button onclick="handle(this, 'radiador', 'estado_rad')">Enviar potencia</button>
+	</p>
+	<div>Potencia radiador: <span id="estado_rad">0</span>%</div>
+	<br>
+	<p>Introduce la potencia del ventilador:
+		<input type="number" id="ventilador" min="0" value="0">
+		<button onclick="handle(this, 'ventilador', 'estado_vent')">Enviar</button>
+	</p>
+	<div>Potencia ventilador: <span id="estado_vent">0</span>%</div>		
+	<br>
+	<button onclick="submit('graficacion', 0)">Mostrar gráfica</button>
 	<script src="funciones.js"></script>
 </body>
 </html>

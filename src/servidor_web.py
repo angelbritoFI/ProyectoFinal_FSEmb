@@ -17,12 +17,10 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 
 # Control del Sistema de Invernadero
 from invernadero import *
-# Manejo de hilos
-from threading import Thread
 
 # Nombre o direccion IP del sistema anfitrion del servidor web
-# address = "localhost"
-address = "192.168.1.254"
+address = "localhost"
+# address = "192.168.1.254"
 # Puerto en el cual el servidor estara atendiendo solicitudes HTTP
 # El default de un servidor web en produción debe ser 80
 port = 8080
@@ -56,9 +54,10 @@ class WebServer(BaseHTTPRequestHandler):
 			return
 		funciones = {
 			'irrigacion' : irrigacion, 		#Sistema de Irrigación
-			#'temperatura': temperatura,	#Control de temperatura
-			#'radiador'	 : radiador, 		#Control de potencia del radiador
-			#'ventilador' : ventilador		#Control de potencia del ventilador
+			'temperatura': temperatura,		#Control de temperatura
+			'radiador'	 : radiador, 		#Control de potencia del radiador
+			'ventilador' : ventilador,		#Control de potencia del ventilador
+			'graficacion': mostrarGrafica	#Desplegado de gráfica
 		}
 		accion = funciones.get(json_obj['action'], None)
 		if accion:
@@ -118,7 +117,7 @@ class WebServer(BaseHTTPRequestHandler):
 			print("Datos POST no recnocidos")
 
 #Inicializar el procesador
-def server():
+def main():
 	# Inicializa una nueva instancia de HTTPServer con el HTTPRequestHandler definido
 	webServer = HTTPServer((address, port), WebServer)
 	print("Servidor iniciado")
@@ -136,13 +135,6 @@ def server():
 	# Reporta parada del servidor web en consola
 	print("\nServidor detenido.")
 
-#Control de hilos para servidor web y simulador
-def main():
-	hilo1 = Thread(target=server)
-	hilo2 = Thread(target=simulador)
-	hilo1.start()
-	hilo2.start()
-	
 # Punto de anclaje de la función principal
 if __name__ == "__main__":
 	main()

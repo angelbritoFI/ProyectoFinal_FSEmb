@@ -9,11 +9,36 @@
 	Description: Funciones para controlar el envío de datos
 */
 function handle(sender, action, value){
-	submit(action, value);
-	if (value == 'on')
-		alert("Sistema de irrigación encendiendo");
-	else
-		alert("Sistema de irrigación apagándose");
+	if (sender.id == 'irrigacionON' || sender.id == 'irrigacionOFF')	
+		irrigacion(action, value);
+	else {
+		validaEnvio(action, value);
+	}
+}
+
+function irrigacion(funcion, estado) {
+	submit(funcion, estado);
+	notificacion = document.getElementById("sistema_irr");
+	if (estado == 'on') {
+		notificacion.innerText = "Sistema de irrigación enciendose";
+	} else {
+		notificacion.innerText = "Sistema de irrigación apagándose";
+	}
+}
+
+function validaEnvio(funcion, etiqueta) {
+	valor = document.getElementById(funcion).value;
+	notifica = document.getElementById(etiqueta);
+    if (valor < 0) {
+    	alert("Debes de introducir un número positivo");
+    } else {
+    	if (isNaN(valor) || valor === "") {
+  			alert("Debes de introducir un número");
+		} else {
+			submit(funcion, valor);
+			notifica.innerText = valor
+		}        
+    }
 }
 
 function submit(action, value){
