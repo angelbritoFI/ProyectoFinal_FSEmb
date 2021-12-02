@@ -24,10 +24,10 @@ def temperatura(num):
 	print("Temperatura cambiada a: ", num, "°C", sep="")
 
 def radiador(potencia):
-	print("Potencia del radiador:",potencia)
+	print("Potencia del radiador: ",potencia, "%", sep="")
 
 def ventilador(potencia):
-	print("Potencia del ventilador:",potencia)
+	print("Potencia del ventilador: ",potencia, "%", sep="")
 
-def mostrarGrafica():
+def mostrarGrafica(valor):
 	print("Imprimiendo gráfica")
