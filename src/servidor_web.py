@@ -18,6 +18,9 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 # Control del Sistema de Invernadero
 from invernadero import *
 
+#Manejo de los hilos
+from threading import Thread
+
 # Nombre o direccion IP del sistema anfitrion del servidor web
 address = "localhost"
 # address = "192.168.1.254"
@@ -117,7 +120,7 @@ class WebServer(BaseHTTPRequestHandler):
 			print("Datos POST no recnocidos")
 
 #Inicializar el procesador
-def main():
+def server():
 	# Inicializa una nueva instancia de HTTPServer con el HTTPRequestHandler definido
 	webServer = HTTPServer((address, port), WebServer)
 	print("Servidor iniciado")
@@ -135,6 +138,12 @@ def main():
 	# Reporta parada del servidor web en consola
 	print("\nServidor detenido.")
 
+def main():
+	hilo1 = Thread(target=server)
+	hilo2 = Thread(target=iniciaControl)
+	hilo1.start()
+	hilo2.start()
+	
 # Punto de anclaje de la función principal
 if __name__ == "__main__":
 	main()
