@@ -1,11 +1,17 @@
 # Control de versiones
 * A continuación se muestran las versiones de cada programa utilizado en el proyecto
 
+## Código simula_invernadero.py
+| Versión | Descripción | Fecha |
+| -- | -- | -- |
+| 1.0 | Incorporación de Interfaz y componentes | 03/12/21 |
+| 1. |  |  |
+
 ## Código invernadero.py
 | Versión | Descripción | Fecha |
 | -- | -- | -- |
 | 1.0 | Incorporación de primera función | 21/11/21 |
-| 1. |  |  |
+| 1.1 | Incorporando funciones de simula_Invernadero | 03/12/20201 |
 
 ## Código servidor_web.py
 | Versión | Descripción | Fecha |
