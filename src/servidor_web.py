@@ -138,11 +138,17 @@ def server():
 	# Reporta parada del servidor web en consola
 	print("\nServidor detenido.")
 
+#Control de varios procesos
 def main():
 	hilo1 = Thread(target=server)
-	hilo2 = Thread(target=iniciaControl)
+	hilo2 = Thread(target=iniciaControl) #Comentar si es una implementación física
 	hilo1.start()
-	hilo2.start()
+	hilo2.start() #Comentar si es una implementación física
+	""" Descomentar si es una implementación física
+	# Control de sensores a través de hilos
+	sensor1 = Thread(target=leerTemperatura)
+	sensor1.start()
+	"""
 	
 # Punto de anclaje de la función principal
 if __name__ == "__main__":

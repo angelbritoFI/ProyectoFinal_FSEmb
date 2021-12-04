@@ -9,7 +9,7 @@
 # Description: Simulador de Invernadero
 
 # Importación de la librería de control del GPIO de la Raspberry Pi
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 
 #Parte gráfica del simulador
 from tkinter import *
