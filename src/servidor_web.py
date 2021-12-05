@@ -21,6 +21,9 @@ from invernadero import *
 #Manejo de los hilos
 from threading import Thread
 
+# Importación de la librería de control del GPIO de la Raspberry Pi
+#import RPi.GPIO as GPIO #Descomentar para una implementación física
+
 # Nombre o direccion IP del sistema anfitrion del servidor web
 address = "localhost"
 # address = "192.168.1.254"

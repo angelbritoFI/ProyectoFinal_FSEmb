@@ -9,7 +9,7 @@
 # Description: Control de Invernadero
 
 # Importación de la librería de control del GPIO de la Raspberry Pi
-#import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO #Descomentar para una implementación física
 
 #Importación del simulador
 from simula_Invernadero import *
@@ -18,8 +18,6 @@ from threading import Thread
 
 import smbus2 #Lectura del puerto serial I2C
 import struct #Conversión de datos binarios a objetos que puede leer Python
-#Importación de la función sleep y strftime del módulo time para control de tiempos
-from time import sleep, strftime
 
 #Configuraciones de la librería RPi.GPIO
 #GPIO.setwarnings(False) # Desactiviar advertencias
@@ -32,9 +30,10 @@ SLAVE_ADDR = 0x0A # Dirección I2C del Arduino
 # Como parámetro se indica el número de dispositivo a controlar
 i2c = smbus2.SMBus(1)
 
+temp = 25 #Temperatura de inicio del invernadero
+
 #Sistema de Irrigación
 def irrigacion(estado):
-	# salida = 'document.getElementById("prueba").innerHTML=%s;' % json_obj['action']
 	#apagaEtiqueta()
 	quitaRiega()
 	riega(estado)
@@ -63,6 +62,7 @@ def iniciaControl():
 
 #Resolución de 10 bits para el convertidor A/D
 def leerTemperatura():
+	global temp
 	while True:
 		try:
 			#Generación del mensaje I2C de tipo lectura

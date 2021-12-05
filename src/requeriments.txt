@@ -1,0 +1,6 @@
+python-magic
+smbus2
+tk
+Pillow
+
+#pip install --user -r requirements.txt

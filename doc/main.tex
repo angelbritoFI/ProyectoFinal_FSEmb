@@ -1,7 +1,7 @@
 % %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Materia: Fundamentos de Sistemas Embebidos
-% Fecha de creación: DD/MM/2021
-% Descripción: 
+% Fecha de creación: 05/12/2021
+% Descripción: Documento con instrucciones simples para ejecutar el proyecto
 % Hecho por:
 %	Brito Segura Angel
 %	Tovar Herrera Carlos Eduardo
@@ -9,8 +9,6 @@
 % %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Raíz del proyecto (este archivo)
 %!TEX root = ./main.tex
-% Archivo de referencias bibliográficas
-%!TEX root = ./referencias.bib
 
                 % Tamaño de hoja y letra (11pt o 12pt -10pt por default-)
 \documentclass[letterpaper,10.5pt]{article} %Tipo de documento
@@ -22,36 +20,57 @@
 
 \title{Manual técnico}
 \author{\textbf{Brito Segura Angel, Tovar Herrera Carlos Eduardo y Zazueta Barájas Sebastián Pedro}}
-\date{Fecha de entrega: \today}
+\date{Fecha de entrega: 9 de diciembre de 2021}
 
 %Configuraciones del documento (cambios a nivel documento)
 \input{./config/document}
+% Estilos para el código fuente
+\input{./config/code-styles}
 
 \begin{document}
     \pagestyle{fancy} %Estilo de página
     \maketitle %Poner el título, autor y fecha al documento
     
-    Instalar: sudo apt install python3-tk python3-pil python3-pil.imagetk
-
-    \section{Introducción}
-	    \textbf{Texto en negritas} \newline
-		\textit{Texto en itálicas o cursivas} \newline
-		\texttt{Texto monoespaciado} \newline
-		\emph{Texto en énfasis} (Varía según tipo de documento) \newline
-		\textsc{Texto en versalles} \newline
-
-    \subsection{Subsección}
-	    Cita de prueba: \cite{kim1995novel}\\ %Cita: [número de cita]
-
-		Otra manera de citar: \citet{ipsum2010lorem}\\ %Cita: Autor [número de cita]
-
-		Según \citeauthor{ipsum2010lorem}, %Citar al autor de una referencia
-		en el año \citeyear{ipsum2010lorem}\\ %Citar el año
-
+    \section{Descarga del proyecto}
+	    Descargar los archivos del proyecto final de \url{https://github.com/angelbritoFI/ProyectoFinal_FSEmb} ejecutando los siguientes comandos:
+	    \begin{verbatim}
+			git clone https://github.com/angelbritoFI/ProyectoFinal_FSEmb
+			cd ProyectoFinal_FSEmb/src
+		\end{verbatim}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=\linewidth, height=11cm]{img/repositorio.png}
+			\caption{Página del repositorio en línea} %Pie de foto
+			\label{fig:figura1} %Se puede otra etiqueta en vez de fig
+		\end{figure}
+		
+    \section{Configuración del simulador}
+    	Para instalar todas las dependencias requeridas por el simulador con la herramienta pip se utiliza el siguiente comando:
+    	\begin{verbatim}pip install --user -r requirements.txt\end{verbatim}
+	
+	\section{Prueba del proyecto}
+		Finalmente, pruebe el simulador ejecutando la siguiente línea:
+		\begin{verbatim}python3 servidor_web.py\end{verbatim}
+	
+		O bien, si desea mantener el simulador como un proyecto aislado y cuenta con la utilería pipenv, después de descargar los archivos del proyecto basta con ejecutar el siguiente coamando:
+		\begin{verbatim}pipenv run python servidor_web.py\end{verbatim}
+	
 	\hfill \break %Salto de línea
 
-	%Agregando fuentes de consulta
-	\bibliographystyle{unsrtnat} %abbrnat es parecido a APA
-	\bibliography{referencias}
-    
+	Si la configuración es correcta, verá la siguiente ventana en la Raspberry Pi:
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\linewidth, height=12cm, keepaspectratio]{img/simulador.png}
+		\caption{Simulador} %Pie de foto
+		\label{fig:figura2} %Se puede otra etiqueta en vez de fig
+	\end{figure}
+
+	Con cualquier dispositivo electrónico conectado a la misma red que la Raspberry Pi, al ingresar la siguiente dirección: \url{http://192.168.1.254:8080} deberá ver la siguiente interfaz de usuario:
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\linewidth, keepaspectratio]{img/pagina.png}
+		\caption{Página web para controlar invernadero} %Pie de foto
+		\label{fig:figura2} %Se puede otra etiqueta en vez de fig
+	\end{figure}	
+	
 \end{document}

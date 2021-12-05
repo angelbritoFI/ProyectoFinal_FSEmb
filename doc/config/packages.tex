@@ -1,6 +1,6 @@
 % %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Materia: Fundamentos de Sistemas Embebidos
-% Fecha de creación: DD/MM/2021
+% Fecha de creación: 05/12/2021
 % Descripción: Lista de paquetes requeridos
 % Hecho por:
 %	Brito Segura Angel
@@ -10,43 +10,34 @@
 % Archivo principal de LaTeX
 %!TEX root = ../main.tex
 
-\usepackage[utf8]{inputenc} %Decodificación del documento
-\usepackage[T1]{fontenc} %Agregar LATIN1 para todas las lenguas romances aceptadas
-\usepackage[spanish,mexico]{babel} %Traducir a español mexicano, opción es-lcroman para minúsculas las letras romanas en numeraciones
-\usepackage{fullpage} %Paquete para margen de la página
-\usepackage{fancyhdr} %Cambiar pie de página y encabezados
-\usepackage{lastpage} %Obtener número de páginas
-\usepackage[usenames,dvipsnames]{xcolor} %Tener variedad de colores
+\usepackage[utf8]{inputenc}                  % Soporte para utf8
+\usepackage[T1]{fontenc}                     % Soporte extendido de caracteres unicode
+\usepackage[spanish,mexico]{babel}
 
-%Referencias en el documento
-\usepackage{varioref} %ya no se ocupa pero es necesario para los siguientes
-\usepackage{hyperref} %habilitar hipervínculos y modificarlos
-\usepackage[noabbrev,nameinlink,spanish]{cleveref} %generar referencias (no abreviar la referencia, link en el nombre de la referencia y número, en español)
-
-% Forma recomendada de citar
-\usepackage[square, comma, numbers, sort&compress]{natbib} %De acuerdo a la IEEE
-%Otra forma de citar
-%\usepackage[backend=biber, style=apa]{biblatex} %Importar la bibliografía con su estilo
-%\addbibresource{referencias.bib} %Importar el archivo con la bibliografía
-
-\usepackage[inline]{enumitem} %Opciones de espacio y en línea para viñetas
-
-\usepackage{float} %Tablas flotantes (se recomienda así) e imágenes
-
-\usepackage{csquotes} %Realiza diferentes tipos de citas
-
-%Uso de tablas
-\usepackage{booktabs} %Tablas elegantes y profesionales
-\usepackage{tabularx}
-\usepackage{multicol}
-\usepackage{multirow} %Muy rara vez se requiere
-
-\usepackage{caption} %Nos da más opciones en los captions
-
-% Manejo de imágenes
-\usepackage{graphicx} %Utilizar imágenes
-\usepackage{wrapfig} %Permitir imágenes a un lado del texto
-
-\usepackage{ragged2e} %Diferentes tipos de alineado
-
-\usepackage{listings} %Para introducir código fuente
+% Standard packages
+\usepackage{float}                           % Imágenes flotantes en el documento
+\usepackage{ifthen}                          % Soporte if-then en macros
+\usepackage{xspace}                          % Soporte de autoespaciado en macros
+\usepackage{xstring}                         % Operaciones con cadenas en macros
+\usepackage{wrapfig}               	% Permite colocar texto al rededor de figuras y otros flotantes
+\usepackage{booktabs}                        % Embellece tablas
+\usepackage{csquotes}                        % Entrecomillado automático y manejo de citas textuales
+\usepackage{fancyhdr}                        % Permite reconfigurar encabezado y pie de página
+\usepackage{fancyvrb}                        % Define estilos para entornos Verbatim
+\usepackage{fullpage}                        
+\usepackage{graphicx}                        % Permite insertar imágenes en varios formatos
+\usepackage{lastpage}                        % Referencia a la última página del documento
+\usepackage{listings}                        % Define estilos para entornos de código de programación (sintaxis)
+\usepackage{multicol}                        % Manejo de texto en varias columnas
+\usepackage{tabularx}                        % Tablas con ancho de columna variable
+\usepackage{algorithm}                       % Entorno para escribir algoritmos
+\usepackage{algpseudocode}                   % Entorno para escribir algoritmos en pseudocódigo
+\usepackage[justification=centering]{subcaption} % Permite imágenes en viñetas
+\usepackage[all]{nowidow}                    % Control de viudas y huérfanas
+\usepackage[inline]{enumitem}                % Añade opciones de configuración a listas
+\usepackage[usenames,dvipsnames]{xcolor}     % Permite el uso de colores en el documento
+% Referencing
+\usepackage{varioref}                        % Gestión de referencias variables
+\usepackage{hyperref}                        % Gestión de referencias e hipervínculos
+\usepackage[noabbrev,nameinlink,spanish]{cleveref} % Gestión de referencias cruzadas inteligentes con hipervínculos
+\usepackage[square, comma, numbers, sort&compress]{natbib} % Gestión de referencias bibliográficas

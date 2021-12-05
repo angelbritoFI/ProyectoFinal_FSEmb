@@ -1,6 +1,6 @@
 % %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Materia: Fundamentos de Sistemas Embebidos
-% Fecha de creación: DD/MM/2021
+% Fecha de creación: 05/12/2021
 % Descripción: Configuración de página y documento en general
 % Hecho por:
 %	Brito Segura Angel
@@ -29,9 +29,19 @@
 }
 \makeatother %Regresar a la configuración normal
 
-%Cambiar el nombre de la refencia dada: tipo, en sigular, en plural
 \crefname{section}{sección}{secciones}
 \Crefname{section}{Sección}{Secciones}
-%Agregar los que sean necesarios cambiar a los que trae por defecto
-\crefname{equation}{fórmula}{fórmulas}
-\Crefname{equation}{Fórmula}{Fórmulas}
+\crefname{subsection}{subsección}{subsecciones}
+\Crefname{subsection}{Subsección}{Subsecciones}
+\crefname{listing}{código de ejemplo}{códigos de ejemplo}
+\Crefname{listing}{Código de Ejemplo}{Códigos de Ejemplo}
+\crefname{table}{tabla}{tablas}
+\Crefname{table}{Tabla}{Tablas}
+
+% Tamaño de la fuente de la leyenda de las imágenes y otros flotantes.
+\captionsetup[lstlisting]{%
+	font={small},
+}
+
+% Leyenda para los entornos listing
+\renewcommand*{\lstlistingname}{Código ejemplo}
