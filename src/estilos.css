@@ -16,6 +16,60 @@ h1 {
  	font-size: 36px;
  	text-align: center;
 }
-h2 {
-	color: red;
-}
+
+#contenedorIrrigacion {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	margin-left: 150px;
+	margin-right: 150px;
+	border: 5px outset rgba(255, 123, 0, 0.103);
+	background-color: rgb(66, 181, 235);    
+	text-align: center;
+  }
+  
+#contenedorIrrigacion > div {
+	width: 50%;
+  }
+#contenedorTemperatura {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	margin-left: 150px;
+	margin-right: 150px;
+	border: 5px outset rgba(255, 60, 0, 0.808);
+	background-color: rgb(235, 231, 18);    
+	text-align: center;
+  }
+  
+#contenedorTemperatura > div {
+	width: 50%;
+  }
+#contenedorRadiador {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	margin-left: 150px;
+	margin-right: 150px;
+	border: 5px outset rgba(19, 13, 8, 0.356);
+	background-color: rgb(91, 236, 6);    
+	text-align: center;
+  }
+  
+#contenedorRadiador > div {
+	width: 50%;
+  }
+#contenedorVentilador {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	margin-left: 150px;
+	margin-right: 150px;
+	border: 5px outset rgba(5, 23, 37, 0.377);
+	background-color: rgb(122, 178, 230);    
+	text-align: center;
+  }
+  
+#contenedorVentilador > div {
+	width: 50%;
+  }

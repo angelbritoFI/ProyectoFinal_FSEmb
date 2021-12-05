@@ -21,8 +21,13 @@ function irrigacion(funcion, estado) {
 	notificacion = document.getElementById("sistema_irr");
 	if (estado == 'on') {
 		notificacion.innerText = "Sistema de irrigación enciendose";
+		imagen = '<img src="Images/aspersor2.png" alt="cargando..." />'
+			document.getElementById('imagenIrrigacion').innerHTML = imagen;
+		
 	} else {
 		notificacion.innerText = "Sistema de irrigación apagándose";
+		imagen = '<img src="Images/aspersor1.png" alt="cargando..." />'
+			document.getElementById('imagenIrrigacion').innerHTML = imagen;
 	}
 }
 
