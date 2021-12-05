@@ -46,7 +46,7 @@
 ### Autores
 * ***Brito Segura Angel***
 * ***Tovar Herrera Carlos Eduardo***
-* ***Zazueta Barájas Sebastián Pedro***
+* ***Zazueta Barajas Sebastián Pedro***
 
 ***
 ### Profesor
