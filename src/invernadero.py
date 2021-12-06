@@ -4,16 +4,17 @@
 # 	Tovar Herrera Carlos Eduardo
 #	Zazueta Barajas Sebastián Pedro
 # License: MIT
-# Version 1.0
-# Date: 21/11/2021
+# Version 1.6
+# Date: 06/12/2021
 # Description: Control de Invernadero
 
 # Importación de la librería de control del GPIO de la Raspberry Pi
 #import RPi.GPIO as GPIO #Descomentar para una implementación física
 
-#Importación del simulador
+#Importación del simulador (comentar para una implementación física)
 from simula_Invernadero import *
 
+#Control de hilos para el simulador (comentar para una implementación física)
 from threading import Thread
 
 import smbus2 	#Lectura del puerto serial I2C
@@ -24,7 +25,12 @@ import time 	#Medición de tiempos
 #GPIO.setwarnings(False) # Desactiviar advertencias
 #GPIO.setmode(GPIO.BOARD) # Usar el número físico de pin
 #GPIO.setup(29,GPIO.IN) #Sensor de humedad
-#GPIO.setup(37,GPIO.OUT) #Válvula de solenoide para riego
+#GPIO.setup(32, GPIO.OUT, initial=GPIO.LOW) # Ventilador
+#GPIO.setup(37,GPIO.OUT, initial=GPIO.LOW) #Válvula de solenoide para riego apagada
+
+#Configuraciones para control de potencia del ventilador
+#pwm = GPIO.PWM(32, 1) #Inicializar pin 32 como PWM a una frecuencia de 1 Hz
+#pwm.start(0) # Establecer ciclo de trabajo al 0% (apagado)
 
 # Dirección del dispositivo I2C
 SLAVE_ADDR = 0x0A # Dirección I2C del Arduino
@@ -117,13 +123,17 @@ def escribePotencia(potencia):
 #Control de potencia del radiador
 def radiador(potencia):
 	escribePotencia(potencia)
-	print("Potencia del radiador: ",potencia, "%", sep="") #Comentar para implementación física	
 	#print("Potencia del radiador: ",leePotencia(), "%", sep="") #Descomentar para implementación física
+	#Comentar las siguientes líneas para implementación física
+	print("Potencia del radiador: ",potencia, "%", sep="")	
 	quitaFoco()
 	calienta(potencia)
 
+#Control de potencia del ventilador
 def ventilador(potencia):
+	#pwm.ChangeDutyCycle(potencia) #Descomentar para implementación física
 	print("Potencia del ventilador: ",potencia, "%", sep="")
+	#Comentar las siguientes líneas para implementación física
 	quitaVentilaAnt()
 	hiloVent = Thread(target = ventila, args=(potencia,))
 	hiloVent.start()

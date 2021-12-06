@@ -65,7 +65,7 @@ class WebServer(BaseHTTPRequestHandler):
 			'ventilador' : ventilador,		#Control de potencia del ventilador
 			'graficacion': mostrarGrafica	#Desplegado de gráfica
 		}
-		accion = funciones.get(json_obj['action'], None)
+		accion = funciones.get(json_obj['action'])
 		if accion:
 			accion(json_obj['value'])
 

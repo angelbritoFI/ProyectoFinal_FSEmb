@@ -15,6 +15,8 @@
 | 1.2 | Incorporando lectura de sensor de temperatura | 04/12/21 |
 | 1.3 | Control de temperatura por PID | 05/12/21 |
 | 1.4 | Control de la potencia del radiador (foco incandescente) | 06/12/21 |
+| 1.5 | Control de potencia del ventilador | 06/12/21 |
+| 1.6 |  |  |
 | 1. |  |  |
 
 ## Código servidor_web.py
