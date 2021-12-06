@@ -12,7 +12,9 @@
 | -- | -- | -- |
 | 1.0 | Incorporación de primera función | 21/11/21 |
 | 1.1 | Incorporando funciones de simula_Invernadero | 03/12/21 |
-| 1.2 | Incorporando lectura de sensor de temperatura |  |
+| 1.2 | Incorporando lectura de sensor de temperatura | 04/12/21 |
+| 1.3 | Control de temperatura por PID | 05/12/21 |
+| 1.4 | Control de la potencia del radiador (foco incandescente) | 06/12/21 |
 | 1. |  |  |
 
 ## Código servidor_web.py

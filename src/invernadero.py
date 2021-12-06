@@ -16,10 +16,9 @@ from simula_Invernadero import *
 
 from threading import Thread
 
-import smbus2 #Lectura del puerto serial I2C
-import struct #Conversión de datos binarios a objetos que puede leer Python
-#Importación de la función sleep del módulo time para observar cambios
-from time import sleep
+import smbus2 	#Lectura del puerto serial I2C
+import struct 	#Conversión de datos binarios a objetos que puede leer Python
+import time 	#Medición de tiempos
 
 #Configuraciones de la librería RPi.GPIO (descomentar para implementación física)
 #GPIO.setwarnings(False) # Desactiviar advertencias
@@ -49,6 +48,7 @@ suma_errores = 0
 #Sistema de Irrigación
 def irrigacion(estado):
 	#apagaEtiqueta()
+	#Comentar las siguientes dos líneas para una implementación física
 	quitaRiega()
 	riega(estado)
 	print("Sistema de irrigación", estado.upper())
@@ -63,7 +63,7 @@ def irrigacion(estado):
 def controlPID(tempObj):
 	global temp, error_previo, suma_errores
 	error = tempObj - temp
-	#Control proporcional
+	#Control proporcional, derivado e integral
 	temp += (error * KP) + (error_previo * KD) + (suma_errores * KI)
 	temp = max(min(150, temp), -55) #Valores mínimos y máximos del sensor LM35
 	error_previo = error
@@ -77,9 +77,48 @@ def temperatura(num):
 	while int(num) != tempA:
 		tempA = temperaturaActual(controlPID(int(num)))
 		print("Devuelta del invernadero por PID: ", tempA, "°C", sep="")
-	
+
+#Leer potencia en el esclavo (Arduino)
+def leePotencia():
+	try:
+		#Generación del mensaje I2C de tipo lectura
+		msg = smbus2.i2c_msg.read(SLAVE_ADDR, 4) #Número de bytes que se leerán del esclavo
+		i2c.i2c_rdwr(msg) #En este caso lectura en I2C (escritura en el canal SDA)		
+		data = list(msg) #Convertir el flujo de datos a una lista de Python
+		""" Función unpack:
+		Recibe un bytearray y un especificador de formato (interpreta los bytes en el arreglo
+			para generar tupla de n elementos)
+		Hace la codificación por defecto en I2C (<):
+			little endian: codifica los bytes con el LSB a la izquierda
+		"""
+		potencia = struct.unpack('<f', ''.join([chr(c) for c in data]))		
+	except:
+		potencia = 0
+
+	return potencia
+
+#Escribir la potencia recibida al esclavo (Arduino)
+def escribePotencia(potencia):
+	try:
+		""" Función pack:
+		Recibe un bytearray y un especificador de formato para poder generar su tupla
+		Se empaqueta la potencia recibida como un valor flotante (f)
+		Hace la codificación por defecto en I2C (<):
+			little endian: codifica los bytes con el LSB a la izquierda
+		"""
+		data = struct.pack('<f', potencia) 
+		#Generación del mensaje I2C de tipo lectura
+		msg = smbus2.i2c_msg.write(SLAVE_ADDR, data) #Número de bytes que se leerán del esclavo
+		i2c.i2c_rdwr(msg) #En este caso lectura en I2C (escritura en el canal SDA)
+	except:
+		#print("Sucedió un error en la escritura de potencia") #Descomentar para implementación física
+		pass #Comentar para implementación física
+
+#Control de potencia del radiador
 def radiador(potencia):
-	print("Potencia del radiador: ",potencia, "%", sep="")
+	escribePotencia(potencia)
+	print("Potencia del radiador: ",potencia, "%", sep="") #Comentar para implementación física	
+	#print("Potencia del radiador: ",leePotencia(), "%", sep="") #Descomentar para implementación física
 	quitaFoco()
 	calienta(potencia)
 
