@@ -2,7 +2,7 @@
 	Authors:
 	 	Brito Segura Angel
 	 	Tovar Herrera Carlos Eduardo
-		Zazueta Barájas Sebastián Pedro
+		Zazueta Barajas Sebastián Pedro
 	License: MIT
 	Version 1.0
 	Date: 20/11/2021

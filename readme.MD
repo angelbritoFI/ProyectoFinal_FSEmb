@@ -7,7 +7,7 @@ Repositorio para los entregables del proyecto final de la materia de Fundamentos
 ## Autores
 * Brito Segura Angel
 * Tovar Herrera Carlos Eduardo
-* Zazueta Barájas Sebastián Pedro
+* Zazueta Barajas Sebastián Pedro
 
 ### Profesor
 *M. en C. José Mauricio Matamoros de María y Campos*

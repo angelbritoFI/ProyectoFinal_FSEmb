@@ -1,4 +1,4 @@
-# @Autors       Brito Segura Angel, Tovar Herrera Carlos Eduardo & Zazueta Barájas Sebastián Pedro
+# @Autors       Brito Segura Angel, Tovar Herrera Carlos Eduardo & Zazueta Barajas Sebastián Pedro
 # @Fecha        13/10/2021
 # @Descripcion  Archivo deconfiguración para una compilación en Linux del archivo en LaTeX
 

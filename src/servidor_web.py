@@ -2,7 +2,7 @@
 # Authors:
 # 	Brito Segura Angel
 # 	Tovar Herrera Carlos Eduardo
-#	Zazueta Barájas Sebastián Pedro
+#	Zazueta Barajas Sebastián Pedro
 # License: MIT
 # Version 1.1
 # Date: 21/11/2021
@@ -143,16 +143,21 @@ def server():
 
 #Control de varios procesos
 def main():
-	hilo1 = Thread(target=server)
-	hilo2 = Thread(target=iniciaControl) #Comentar si es una implementación física
-	hilo1.start()
-	hilo2.start() #Comentar si es una implementación física
-	""" Descomentar si es una implementación física
-	# Control de sensores a través de hilos
-	sensor1 = Thread(target=leerTemperatura)
-	sensor1.start()
-	"""
-	
+	try:
+		hilo1 = Thread(target=server)
+		hilo2 = Thread(target=iniciaControl) #Comentar si es una implementación física
+		hilo1.start()
+		hilo2.start() #Comentar si es una implementación física
+		""" Descomentar si es una implementación física
+		# Control de sensores a través de hilos
+		sensor1 = Thread(target=leerTemperatura)
+		sensor1.start()
+		"""
+	except:
+		print("Terminando programa")
+		# Reiniciar todos los puertos para que estén en su estado por defecto (entradas)
+		#GPIO.cleanup() #Descomentar si es una implementación física
+
 # Punto de anclaje de la función principal
 if __name__ == "__main__":
 	main()
