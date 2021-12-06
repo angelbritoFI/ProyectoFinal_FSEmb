@@ -18,6 +18,8 @@ from threading import Thread
 
 import smbus2 #Lectura del puerto serial I2C
 import struct #Conversión de datos binarios a objetos que puede leer Python
+#Importación de la función sleep del módulo time para observar cambios
+from time import sleep
 
 #Configuraciones de la librería RPi.GPIO (descomentar para implementación física)
 #GPIO.setwarnings(False) # Desactiviar advertencias
@@ -34,6 +36,15 @@ i2c = smbus2.SMBus(1)
 
 temp = 25 #Temperatura de inicio del invernadero
 humedo = False #Humedad del huerto
+tempA = 0
+
+#Constantes para controlador PID
+KP = 0.02 	#Constante para control proporcional
+KD = 0.01 	#Constante para control derivativo
+KI = 0.005	#Constante para control integral
+
+error_previo = 0
+suma_errores = 0
 
 #Sistema de Irrigación
 def irrigacion(estado):
@@ -48,10 +59,25 @@ def irrigacion(estado):
 		GPIO.output(37, False) #Apagar válvula con agua
 	"""
 
-def temperatura(num):
-	print("Temperatura cambiada a: ", num, "°C", sep="")
-	print("Devuelta del invernadero:", temperaturaActual())
+#Controlador PID
+def controlPID(tempObj):
+	global temp, error_previo, suma_errores
+	error = tempObj - temp
+	#Control proporcional
+	temp += (error * KP) + (error_previo * KD) + (suma_errores * KI)
+	temp = max(min(150, temp), -55) #Valores mínimos y máximos del sensor LM35
+	error_previo = error
+	suma_errores += error
+	return int(temp)
 
+#Control de temperatura
+def temperatura(num):
+	global tempA
+	print("Temperatura deseada por el usuario: ", num, "°C", sep="")
+	while int(num) != tempA:
+		tempA = temperaturaActual(controlPID(int(num)))
+		print("Devuelta del invernadero por PID: ", tempA, "°C", sep="")
+	
 def radiador(potencia):
 	print("Potencia del radiador: ",potencia, "%", sep="")
 	quitaFoco()

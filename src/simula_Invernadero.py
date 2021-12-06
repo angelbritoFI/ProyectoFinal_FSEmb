@@ -53,7 +53,7 @@ imgAsp = None
 lblAsp_Img = None 
 lblOnOff_Asp = None
 #Termometro
-temperatura = "0"
+temperatura = "25"
 lblTemp = None
 
 #Foco 
@@ -325,12 +325,9 @@ def apagaEtiqueta():
     etiqueta.grid_remove()
 
 #Devuelve temperatura actual
-def temperaturaActual():
-    global temperatura
-    #print("temperatura - 1")
-    #print(temperatura)
-    return int(temperatura) #La recibe como cadena, por eso el int
-
+def temperaturaActual(temp):
+    slider_changed(str(temp))
+    return int(temperatura)
 
 #Prueba para crear animacion en tkinter
 def fingeMoverte():
