@@ -152,6 +152,8 @@ def main():
 		# Control de sensores a través de hilos
 		sensor1 = Thread(target=leerTemperatura)
 		sensor1.start()
+		sensor2 = Thread(target=registrarHumedad)
+		sensor2.start()
 		"""
 	except:
 		print("Terminando programa")

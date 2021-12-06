@@ -19,9 +19,11 @@ from threading import Thread
 import smbus2 #Lectura del puerto serial I2C
 import struct #Conversión de datos binarios a objetos que puede leer Python
 
-#Configuraciones de la librería RPi.GPIO
+#Configuraciones de la librería RPi.GPIO (descomentar para implementación física)
 #GPIO.setwarnings(False) # Desactiviar advertencias
 #GPIO.setmode(GPIO.BOARD) # Usar el número físico de pin
+#GPIO.setup(29,GPIO.IN) #Sensor de humedad
+#GPIO.setup(37,GPIO.OUT) #Válvula de solenoide para riego
 
 # Dirección del dispositivo I2C
 SLAVE_ADDR = 0x0A # Dirección I2C del Arduino
@@ -31,6 +33,7 @@ SLAVE_ADDR = 0x0A # Dirección I2C del Arduino
 i2c = smbus2.SMBus(1)
 
 temp = 25 #Temperatura de inicio del invernadero
+humedo = False #Humedad del huerto
 
 #Sistema de Irrigación
 def irrigacion(estado):
@@ -38,6 +41,12 @@ def irrigacion(estado):
 	quitaRiega()
 	riega(estado)
 	print("Sistema de irrigación", estado.upper())
+	"""Descomentar para implementación física
+	if estado == 'on':		
+		GPIO.output(37, True) #Prender válvula con agua
+	else:
+		GPIO.output(37, False) #Apagar válvula con agua
+	"""
 
 def temperatura(num):
 	print("Temperatura cambiada a: ", num, "°C", sep="")
@@ -83,3 +92,12 @@ def leerTemperatura():
 			print("Temperatura leida del sensor: ", temp, "°C", sep="")
 		except:
 			print("Sucedió un error con el sensor de temperatura")
+
+#Sensor de humedad sencillo
+def registrarHumedad():
+	global humedo
+	while True:
+		if (GPIO.input(29)) == 0:
+			humedo = True
+		else:
+			humedo = False
