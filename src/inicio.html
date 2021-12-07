@@ -25,20 +25,30 @@
 			</p>
 		</div>
 		<div>
-		  <p>Valor de temperatura: <span id="estado_temp">25</span>°C</p>
+		  <right><p>Valor de temperatura: <span id="estado_temp">25</span>°C</p></right>
+		</div>
+		<div class='horarios'>
+			<center><h4>Programación de ciclos de temperatura e irrigado</h4></center>
 		</div>
 	</div>
 	<br>
 	<div id="contenedorIrrigacion">
 		<div>
-			<p>Sistema de Irrigación
+			<p>   Sistema de Irrigación
 			<button id="irrigacionON" onclick="handle(this, 'irrigacion', 'on')">Encender</button>
 			<button id="irrigacionOFF" onclick="handle(this, 'irrigacion', 'off')">Apagar</button>
-			
 			</p>
+			<center> <p id="sistema_irr"></p> </center>
 		</div>
 		<div id = 'imagenIrrigacion'> </div>
-		<div><p id="sistema_irr"></p></div> 
+		<div class = 'programa'>	
+			Introduce la temperatura deseada para el invernadero:
+				<center><input type="number" id="tempProg" min="0" value="0"> </center>
+			<p>Selecciona fecha para la irrigación: <input type="date" id="fecha" required></p>
+			<p>Hora de inicio (formato de 24 horas): <input type="time" id="t_inicio" required></p>
+			<p>Hora de término (formato de 24 horas): <input type="time" id="t_fin" required></p>
+		</div>
+		
 	</div>
 	<br>
 	<div id="contenedorRadiador">
@@ -47,10 +57,15 @@
 				<input type="number" id="radiador" min="0" value="0">
 				<button onclick="handle(this, 'radiador', 'estado_rad')">Enviar potencia</button>
 			</p>
-			Potencia radiador: <span id="estado_rad">0</span>%
+			<center> Potencia radiador: <span id="estado_rad">0</span>% </center>
 		</div>
-		<div>
-		  <img src="Images/foco1.png" width = "150" height = "150">
+		<div id = 'imagenFoco'></div>
+		<div class = 'programa2'>
+			<br>
+			<center><button onclick="ciclosTempIrr('programacion')">Programar</button>
+				<p id="programado"></p>
+			</center>
+			
 		</div>
 	</div>
 	<br>
@@ -60,25 +75,14 @@
 				<input type="number" id="ventilador" min="0" value="0">
 				<button onclick="handle(this, 'ventilador', 'estado_vent')">Enviar</button>
 			</p>
-			<p> Potencia ventilador: <span id="estado_vent">0</span>% </p>	
+			<center> Potencia ventilador: <span id="estado_vent">0</span>%</center>	
 		</div>
-		<div>
-		  <img src="Images/ventilador1.png" width = "150" height = "150">
-		</div>
+		<div id = 'imagenVentilador'> </div>
 	</div>
 	<br>
 	<center><button onclick="submit('graficacion', 0)">Mostrar gráfica</button></center>
 	<br>
-	<h2>Programación de ciclos de temperatura e irrigado</h2>
-	<div>
-		<p>Introduce la temperatura deseada para el invernadero:
-			<input type="number" id="tempProg" min="0" value="0"></p>
-		<p>Selecciona fecha para la irrigación: <input type="date" id="fecha" required></p>
-		<p>Hora de inicio (formato de 24 horas): <input type="time" id="t_inicio" required></p>
-		<p>Hora de término (formato de 24 horas): <input type="time" id="t_fin" required></p>
-		<button onclick="ciclosTempIrr('programacion')">Programar</button>
-		<p id="programado"></p>
-	</div>
+	
 	<script src="funciones.js"></script>
 </body>
 </html>

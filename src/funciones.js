@@ -8,7 +8,7 @@
 	Date: 20/11/2021
 	Description: Funciones para controlar el envío de datos
 */
-//Función para controlar el envío de acciones al programa de Python
+//Función para controlar el envío de acciones del sistema de irrigacion
 function handle(sender, action, value){
 	if (sender.id == 'irrigacionON' || sender.id == 'irrigacionOFF')	
 		irrigacion(action, value);
@@ -23,17 +23,18 @@ function irrigacion(funcion, estado) {
 	notificacion = document.getElementById("sistema_irr");
 	if (estado == 'on') {
 		notificacion.innerText = "Sistema de irrigación enciendose";
-		imagen = '<img src="Images/aspersor2.png" alt="cargando..." />'
+		imagen = '<center><img src="Images/aspersor2.png" width = "150" height = "150" /></center>'
 			document.getElementById('imagenIrrigacion').innerHTML = imagen;
 		
 	} else {
 		notificacion.innerText = "Sistema de irrigación apagándose";
-		imagen = '<img src="Images/aspersor1.png" alt="cargando..." />'
+		imagen = '<center><img src="Images/aspersor1.png" width = "150" height = "150" /></center>'
 			document.getElementById('imagenIrrigacion').innerHTML = imagen;
 	}
 }
 
-//Función para validar el envío de números al programa de Python
+
+//Función para validar el envío de números al programa de Python y mostra
 function validaEnvio(funcion, etiqueta) {
 	valor = document.getElementById(funcion).value;
 	notifica = document.getElementById(etiqueta);
@@ -43,10 +44,66 @@ function validaEnvio(funcion, etiqueta) {
     	if (isNaN(valor) || valor === "") {
   			alert("Debes de introducir un número");
 		} else {
+			if (valor > 100){
+				valor = 100
+			}
+			else{
+				valor  = valor
+			}
 			submit(funcion, valor);
+			muestraImagenes(funcion, valor);
 			notifica.innerText = valor
 		}        
     }
+}
+
+//Muestra las imagenes correspondientes a la potencia del radiador
+function muestraImagenes(funcion, valor){
+	if (funcion == 'radiador'){
+		if (valor<= 20){
+			imagen = '<center><img src="Images/foco1.png" width = "130" height = "130" /></center>'
+	document.getElementById('imagenFoco').innerHTML = imagen;
+		}
+		else if (valor> 20 && valor<= 40){
+			imagen = '<center><img src="Images/foco2.png" width = "130" height = "130" /></center>'
+	document.getElementById('imagenFoco').innerHTML = imagen;
+		}
+		else if (valor> 40 && valor<= 60){
+			imagen = '<center><img src="Images/foco3.png" width = "130" height = "130" /></center>'
+	document.getElementById('imagenFoco').innerHTML = imagen;
+		}
+		else if (valor> 60 && valor<= 80){
+			imagen = '<center><img src="Images/foco4.png" width = "130" height = "130" /></center>'
+	document.getElementById('imagenFoco').innerHTML = imagen;
+		}
+		else{
+			imagen = '<center><img src="Images/foco5.png" width = "130" height = "130" /></center>'
+	document.getElementById('imagenFoco').innerHTML = imagen;
+		}
+	}
+	
+	else if (funcion == 'ventilador'){
+		if (valor<= 33){
+			imagen = '<center><img src="Images/ventilador1.png" width = "130" height = "130" /></center>'
+	document.getElementById('imagenVentilador').innerHTML = imagen;
+		}
+		else if (valor> 33 && valor<= 66){
+			imagen = '<center><img src="Images/ventilador2.png" width = "130" height = "130" /></center>'
+	document.getElementById('imagenVentilador').innerHTML = imagen;
+		}
+		else{
+			imagen = '<center><img src="Images/ventilador3.png" width = "130" height = "130" /></center>'
+	document.getElementById('imagenVentilador').innerHTML = imagen;
+		}
+	}
+	else{
+		imagen = '<center><img src="Images/foco1.png" width = "130" height = "130" /></center>'
+	document.getElementById('imagenFoco').innerHTML = imagen;
+		imagen = '<center><img src="Images/ventilador1.png" width = "130" height = "130" /></center>'
+	document.getElementById('imagenVentilador').innerHTML = imagen;
+
+	}
+	
 }
 
 //Función para programar ciclos de temperatura e irrigado

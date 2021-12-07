@@ -21,55 +21,79 @@ h1 {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	margin-left: 150px;
-	margin-right: 150px;
-	border: 5px outset rgba(255, 123, 0, 0.103);
+	margin-left: 120px;
+	margin-right: 120px;
+	font-family: Helvetica, Arial, sans-serif; 
+	border: 5px  green;
 	background-color: rgb(66, 181, 235);    
-	text-align: center;
+	text-align: justify;
   }
   
 #contenedorIrrigacion > div {
-	width: 50%;
+	width: 33%;
   }
+
 #contenedorTemperatura {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	margin-left: 150px;
-	margin-right: 150px;
-	border: 5px outset rgba(255, 60, 0, 0.808);
+	margin-left: 120px;
+	margin-right: 120px;
+	font-family: Helvetica, Arial, sans-serif; 
+	border: 5px  green;
 	background-color: rgb(235, 231, 18);    
-	text-align: center;
+	text-align: left;
   }
   
 #contenedorTemperatura > div {
-	width: 50%;
+	width: 33%;
   }
+.horarios{
+	height:100px;
+	background-color: rgb(56, 129, 212, 0.808);    
+	text-align: center;
+}
+.programa{
+	height:210px;
+	background-color: rgb(214, 224, 235); 
+	font-family: Helvetica, Arial, sans-serif;  
+	vertical-align: middle; 
+	text-align: center;
+}
+.programa2{
+	height:145px;
+	background-color: rgb(214, 224, 235);   
+	vertical-align: middle; 
+	text-align: left;
+}
 #contenedorRadiador {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	margin-left: 150px;
-	margin-right: 150px;
-	border: 5px outset rgba(19, 13, 8, 0.356);
-	background-color: rgb(91, 236, 6);    
-	text-align: center;
+	margin-left: 120px;
+	margin-right: 120px;
+	font-family: Helvetica, Arial, sans-serif; 
+	border: 5px green;
+	background-color: rgb(172, 172, 172);    
+	text-align: justify;
   }
   
 #contenedorRadiador > div {
-	width: 50%;
+	width: 33%;
   }
 #contenedorVentilador {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	margin-left: 150px;
-	margin-right: 150px;
-	border: 5px outset rgba(5, 23, 37, 0.377);
+	margin-left: 120px;
+	margin-right: 120px;
+	font-family: Helvetica, Arial, sans-serif; 
+	border: 5px green;
 	background-color: rgb(122, 178, 230);    
-	text-align: center;
+	text-align: left;
   }
   
 #contenedorVentilador > div {
-	width: 50%;
+	width: 33%;
   }
+
