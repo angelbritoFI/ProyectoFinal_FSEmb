@@ -150,7 +150,7 @@ def iniciaControl():
 def programaInvernadero(entrada):
 	global tempC, fecha_programada, horaInicio, horaTermino
 	datos = entrada.split(",")	
-	tempC = int(datos[0])
+	tempC = float(datos[0])
 
 	fecha = datos[1].split("-")
 	#Acomodar arreglo de cadenas a enteros
@@ -201,6 +201,7 @@ def ciclosTempIrr():
 	global fecha_programada, horaInicio, horaTermino
 	desactivado = True #Bandera para simulación, comentar y solo llamar a las funciones para implementación física
 	tempA = 0
+	irrigado = False #Bandera para implementación física
 	while True:
 		Ahora = datetime.now()
 		#Programación de ciclos de temperatura e irrigado activado
@@ -209,6 +210,7 @@ def ciclosTempIrr():
 			if (Ahora.day == fecha_programada[0] and Ahora.month == fecha_programada[1] and Ahora.year == fecha_programada[2]):
 				#¿Es la hora para iniciar?
 				if (Ahora.hour == horaInicio[0] and Ahora.minute == horaInicio[1]):
+					irrigado = True
 					if desactivado:
 						print("Iniciando ciclo programado de temperatura e irrigado")
 						tempA = temp
@@ -217,8 +219,18 @@ def ciclosTempIrr():
 						desactivado = False
 				#¿Es la hora de terminar irrigado?
 				elif (Ahora.hour == horaTermino[0] and Ahora.minute == horaTermino[1]):
+					irrigado = False
 					if desactivado == False:
 						print("Terminando ciclo programado de temperatura e irrigado")
 						irrigacion('off')
 						temperatura(tempA) #Regresando a valor de temperatura inicial
 						desactivado = True
+		"""Descomentar si es una implementación física
+		#Comprobando que se mantenga temperatura e irrigado en el ciclo
+		if irrigado:
+			if tempC != temp:
+				temperatura(tempC)
+			elif humedo == False:
+				#Suelo del invernadero seco
+				irrigacion('on') #Activando el sistema de irrigación
+		"""
