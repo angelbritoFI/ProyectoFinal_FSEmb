@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<!--
+	License: MIT
+	Version 1.0
+	Date: 20/11/2021
+-->
+<head>
+	<meta charset="utf-8">
+	<title>Invernadero</title>
+	<meta name="authors" content="Brito Segura Angel, Tovar Herrera Carlos Eduardo 
+		& Zazueta Barajas Sebastián Pedro">
+	<meta name="description" content="Página principal del control remoto de invernadero">
+	<meta name="keywords" content="HTML5, proyecto final, invernadero, sistema embebido">
+	<link rel="shortcut icon" href="icono.png"> <!--Icono diseñado por Freepik en www.flaticon.es-->
+	<link rel="stylesheet" type="text/css" href="estilos.css">
+</head>
+<body>
+	<h1>Control de Invernadero</h1>
+	<div id="contenedorTemperatura">
+		<div>
+			<p>Introduce la temperatura para el invernadero:
+			<input type="number" id="temperatura" min="0" value="0">
+			<button onclick="handle(this, 'temperatura', 'estado_temp')">Enviar temperatura</button>
+			</p>
+		</div>
+		<div>
+		  <right><p>Valor de temperatura: <span id="estado_temp">25</span>°C</p></right>
+		</div>
+		<div class='horarios'>
+			<center><h4>Programación de ciclos de temperatura e irrigado</h4></center>
+		</div>
+	</div>
+	<br>
+	<div id="contenedorIrrigacion">
+		<div>
+			<p>   Sistema de Irrigación
+			<button id="irrigacionON" onclick="handle(this, 'irrigacion', 'on')">Encender</button>
+			<button id="irrigacionOFF" onclick="handle(this, 'irrigacion', 'off')">Apagar</button>
+			</p>
+			<center> <p id="sistema_irr"></p> </center>
+		</div>
+		<div id = 'imagenIrrigacion'> </div>
+		<div class = 'programa'>	
+			Introduce la temperatura deseada para el invernadero:
+				<center><input type="number" id="tempProg" min="0" value="0"> </center>
+			<p>Selecciona fecha para la irrigación: <input type="date" id="fecha" required></p>
+			<p>Hora de inicio (formato de 24 horas): <input type="time" id="t_inicio" required></p>
+			<p>Hora de término (formato de 24 horas): <input type="time" id="t_fin" required></p>
+		</div>
+		
+	</div>
+	<br>
+	<div id="contenedorRadiador">
+		<div>
+			<p>Introduce la potencia del radiador:
+				<input type="number" id="radiador" min="0" value="0">
+				<button onclick="handle(this, 'radiador', 'estado_rad')">Enviar potencia</button>
+			</p>
+			<center> Potencia radiador: <span id="estado_rad">0</span>% </center>
+		</div>
+		<div id = 'imagenFoco'></div>
+		<div class = 'programa2'>
+			<br>
+			<center><button onclick="ciclosTempIrr('programacion')">Programar</button>
+				<p id="programado"></p>
+			</center>
+			
+		</div>
+	</div>
+	<br>
+	<div id="contenedorVentilador">
+		<div>
+			<p>Introduce la potencia del ventilador:
+				<input type="number" id="ventilador" min="0" value="0">
+				<button onclick="handle(this, 'ventilador', 'estado_vent')">Enviar</button>
+			</p>
+			<center> Potencia ventilador: <span id="estado_vent">0</span>%</center>	
+		</div>
+		<div id = 'imagenVentilador'> </div>
+	</div>
+	<br>
+	<center><button onclick="submit('graficacion', 0)">Mostrar gráfica</button></center>
+	<br>
+	
+	<script src="funciones.js"></script>
+</body>
+</html>
