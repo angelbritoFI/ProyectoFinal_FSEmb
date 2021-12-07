@@ -35,19 +35,21 @@
 | 1.1 | Agregando botones para controlar potencias | 01/12/21 |
 | 1.2 | Terminando botones y mensajes para control de invernadero | 02/12/21 |
 | 1.3 | Agregando sección para programado de ciclos de temperatura e irrigado | 05/12/21 |
+| 1.4 | Modificar distribución de elemetos| 06/12/21 |
 
 ## Código estilos.css
 | Versión | Descripción | Fecha |
 | -- | -- | -- |
 | 1.0 | Agregando primeros estilos para página principal | 20/11/21 |
-| 1. |  |  |
+| 1.1 | Agregando estilos para despliegue de informacion | 02/12/21 |
+| 1.2 | Agregando estilos para mostrar imagenes | 03/12/21 |
 
 ## Código funciones.js
 | Versión | Descripción | Fecha |
 | -- | -- | -- |
 | 1.0 | Creando funciones para enviar JSON a Python | 20/11/21 |
 | 1.1 | Agregando funciones de cambio en la página web | 01/12/21 |
-| 1. |  |  |
+| 1.2 | Agregando funciones para mostrar imagenes | 06/12/21 |
 
 ### Autores
 * ***Brito Segura Angel***
