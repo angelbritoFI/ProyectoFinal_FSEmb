@@ -38,7 +38,10 @@ i2c = smbus2.SMBus(1)
 
 temp = 25 #Temperatura de inicio del invernadero
 humedo = False #Humedad del huerto
-tempA = error_previo = suma_errores = tempC = 0
+tempA = 0
+error_previo = 0
+suma_errores = 0
+tempC = 0
 
 #Arreglos para almacenar las variables para el programado de ciclos
 fecha_programada = []
@@ -78,6 +81,7 @@ def controlPID(tempObj):
 #Control de temperatura
 def temperatura(num):
 	global tempA
+	tempA = temp
 	print("Temperatura deseada por el usuario: ", num, "°C", sep="")
 	while int(num) != tempA:
 		tempA = temperaturaActual(controlPID(int(num)))
@@ -144,7 +148,6 @@ def iniciaControl():
 
 # Función para obtener los datos del usuario de la página web
 def programaInvernadero(entrada):
-	#0,2021-12-08,00:03,12:00
 	global tempC, fecha_programada, horaInicio, horaTermino
 	datos = entrada.split(",")	
 	tempC = int(datos[0])
@@ -195,8 +198,27 @@ def registrarHumedad():
 
 #Programado de ciclos de temperatura e irrigado
 def ciclosTempIrr():
+	global fecha_programada, horaInicio, horaTermino
+	desactivado = True #Bandera para simulación, comentar y solo llamar a las funciones para implementación física
+	tempA = 0
 	while True:
 		Ahora = datetime.now()
+		#Programación de ciclos de temperatura e irrigado activado
 		if len(fecha_programada) == 3:
-			print(fecha_programada, horaInicio, horaTermino)
-		#print(ahora.year, ahora.month, ahora.day, ahora.hour, ahora.minute, ahora.second)
+			# ¿Es la fecha de hacer el ciclo?
+			if (Ahora.day == fecha_programada[0] and Ahora.month == fecha_programada[1] and Ahora.year == fecha_programada[2]):
+				#¿Es la hora para iniciar?
+				if (Ahora.hour == horaInicio[0] and Ahora.minute == horaInicio[1]):
+					if desactivado:
+						print("Iniciando ciclo programado de temperatura e irrigado")
+						tempA = temp
+						temperatura(tempC)
+						irrigacion('on')
+						desactivado = False
+				#¿Es la hora de terminar irrigado?
+				elif (Ahora.hour == horaTermino[0] and Ahora.minute == horaTermino[1]):
+					if desactivado == False:
+						print("Terminando ciclo programado de temperatura e irrigado")
+						irrigacion('off')
+						temperatura(tempA) #Regresando a valor de temperatura inicial
+						desactivado = True
