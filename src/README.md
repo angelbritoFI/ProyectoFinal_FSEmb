@@ -6,6 +6,7 @@
 | -- | -- | -- |
 | 1.0 | Incorporación de Interfaz y componentes | 03/12/21 |
 | 1.1 | Cambio para la animación del ventilador | 06/12/21 |
+| 1.2 | Limpieza de código y mejora visual, mejoramiento de la animación del ventilador | 06/12/21 |
 
 ## Código invernadero.py
 | Versión | Descripción | Fecha |
