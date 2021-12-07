@@ -5,7 +5,7 @@
 | Versión | Descripción | Fecha |
 | -- | -- | -- |
 | 1.0 | Incorporación de Interfaz y componentes | 03/12/21 |
-| 1. |  |  |
+| 1.1 | Cambio para la animación del ventilador | 06/12/21 |
 
 ## Código invernadero.py
 | Versión | Descripción | Fecha |
@@ -16,7 +16,7 @@
 | 1.3 | Control de temperatura por PID | 05/12/21 |
 | 1.4 | Control de la potencia del radiador (foco incandescente) | 06/12/21 |
 | 1.5 | Control de potencia del ventilador | 06/12/21 |
-| 1.6 |  |  |
+| 1.6 | Cambios en el control del ventilador simulado (Se quito la necesidad de hilos) | 06/12/21 |
 | 1. |  |  |
 
 ## Código servidor_web.py
