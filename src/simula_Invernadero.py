@@ -4,63 +4,59 @@
 # 	Tovar Herrera Carlos Eduardo
 #	Zazueta Barajas Sebastián Pedro
 # License: MIT
-# Version 1.0
-# Date: 21/11/2021
+# Version 1.2
+# Date: 06/12/2021
 # Description: Simulador de Invernadero
 
 #Parte gráfica del simulador
 from tkinter import *
 from PIL import ImageTk, Image
 
-#Para manejar animaciones (Tal vez cambien a gifs)
+#Para manejar animaciones 
 from threading import Thread
-
+#Para el apoyo de las animaciones
 from time import sleep
 
-"""
+""" Simulador de un invernadero, este simulador nos mostrará los componentes que se activan desactivan, dependiendo de 
+las acciones realizadas por el servidor web/invernadero, el cual puede ser reemplazado por la implementación física
+siendo este simulador, solamente eso, un simulador visual de dicha implementación
 
 """
 
-#Cuadros a utilizar (Que requieren activarse o cambiar por funciones)
-etiqueta = None #Ejemplo
-img = None
-panel = None
+#Ventana principal
 raiz = None
-
-#Imagenes para animar
-
-imgAsp = None
-
-imgTerm = None
+fondo = 'light sky blue'
 
 #Ventilador 
-activa_Vent = False
-imgActual_Vent = 0
-imgVent = None
-lblVent_Img = None
-lblPot_Vent = None 
-lblOnOff_Vent = None
-####IMAGENES VENTILADOR x3
+activa_Vent = False  #Variable para control de animación
+imgActual_Vent = 0   #Variable para reanudar animación
+imgVent = None       #Para asignar imagen
+lblVent_Img = None   #A esta etiqueta se le asignará la imagen
+lblPot_Vent = None   #Etiqueta que muestra la potencia actual del ventilador
+lblOnOff_Vent = None #Etiqueta que muestra si el ventilador esta prendido o apagado
 
 #Aspersor
-imgAsp = None 
-lblAsp_Img = None 
-lblOnOff_Asp = None
+imgAsp = None       #Para asignar imagen
+lblAsp_Img = None   #A esta etiqueta se le asignará la imagen
+lblOnOff_Asp = None #Etiqueta que muestra si se está regando o no
+
 #Termometro
-temperatura = "25"
-lblTemp = None
+temperatura = "25"  #Variable para obtener/mostrar la temperatura actual
+lblTemp = None      #Etiqueta que muestra la temperatura actual (Se puede ver el valor en el slider también)
+imgTerm = None      #Para asignar imagen
+lblTerm_Img = None  #Etiqueta a la que se le asignará la imagen
 
 #Foco 
-imgFoco = None 
-lblFoco_Img = None 
-lblPot_Foco = None 
-lblOnOff_Foco = None 
-imgActual_Foco = 0
-imgFoco = None
+imgFoco = None         #Para asignar imagen
+lblFoco_Img = None     #Etiqueta a la que se le asignará la imagen
+lblPot_Foco = None     #Etiqueta que muestra la potencia actual del foco
+lblOnOff_Foco = None   #Etiqueta que muestra si está encendido o apagado
+imgActual_Foco = 0     #Variable para cambios de la imagen       
 
 #Función para iniciar el simulador
 def simularInvernadero():
-    global etiqueta, raiz #Quitar etiqueta
+    #Estas variables se definen como globales para evitar crear "múltiples" elementos
+    global raiz, fondo
     #Ventilador
     global imgVent, lblVent_Img, lblPot_Vent, lblOnOff_Vent
     #Aspersor
@@ -69,15 +65,15 @@ def simularInvernadero():
     global lblTemp, temperatura, lblTerm_Img, imgTerm
     #Foco
     global imgFoco, lblFoco_Img, lblPot_Foco, lblOnOff_Foco
-    global img, panel #ejemplos
-    fondo = 'light sky blue'
+
+    #Definición de la ventana principal
     raiz = Tk() #Ventana principal
     raiz.geometry('600x700') #Dimensiones
     raiz.configure(bg = fondo) #Color de fondo
     raiz.title('Invernadero Simulado') #Título
-	# Al presionar sobre el botón Cerrar 'X', el programa llegará a su fin
+	# Al presionar sobre el botón Cerrar 'X', el programa llegará a su fin (Hilo del simulador)
 
-    #Espacios vacíos
+    #Espacios vacíos para ordenar la ventana
     vacio1 = Label(raiz)
     vacio1.configure(bg = fondo)
     vacio1.grid(row = 0, column = 0)
@@ -103,26 +99,13 @@ def simularInvernadero():
     vacio5.grid(row = 8, column = 0)
     vacio5["text"]="      "
 
-    #Ejemplo
-    #img = ImageTk.PhotoImage(Image.open(img1))
-    #panel = Label(raiz, image = img)
-    #panel.grid(row = 2, column = 2)
-    #hilo1 = Thread(target=fingeMoverte) #, args=(x,y)
-    #hilo1.start()
-
-    etiqueta = Label(raiz)
-    etiqueta.configure(bg = 'dodger blue')
-    #etiqueta.grid(row = 0, column = 4)
-    etiqueta["text"] = "Etiqueta"
-
     #Ventilador
     #Variables: imgVent, lblVent_Img, lblPot_Vent, lblOnOff_Vent
     #Imagen
     imgVent = ImageTk.PhotoImage(Image.open("Images/ventilador1.png"))
     lblVent_Img = Label(raiz, image = imgVent)
+    lblVent_Img.configure(bg=fondo)
     lblVent_Img.grid(row = 1, column = 1)
-    #hiloVent = Thread(target = ventila, args=(False))
-    #hiloVent.start()
 
     #Potencia
     lblPot_Vent = Label(raiz)
@@ -140,8 +123,8 @@ def simularInvernadero():
     #Imagen
     imgFoco = ImageTk.PhotoImage(Image.open("Images/foco1.png"))
     lblFoco_Img = Label(raiz, image = imgFoco)
+    lblFoco_Img.configure(bg=fondo)
     lblFoco_Img.grid(row = 1, column = 3)
-    #hiloFoco = Thread(target = calienta, args=(False))
     
     #Potencia
     lblPot_Foco = Label(raiz)
@@ -159,8 +142,8 @@ def simularInvernadero():
     #Imagen
     imgAsp = ImageTk.PhotoImage(Image.open("Images/aspersor1.png"))
     lblAsp_Img = Label(raiz, image = imgAsp)
+    lblAsp_Img.configure(bg = fondo)
     lblAsp_Img.grid(row = 5, column = 1)
-    #hiloFoco = Thread(target = calienta, args=(False))
 
     #ON/OFF
     lblOnOff_Asp = Label(raiz)
@@ -173,8 +156,8 @@ def simularInvernadero():
     #Imagen
     imgTerm = ImageTk.PhotoImage(Image.open("Images/term1.png"))
     lblTerm_Img = Label(raiz, image = imgTerm)
+    lblTerm_Img.configure(bg = fondo)
     lblTerm_Img.grid(row = 5, column = 3)
-    #hiloFoco = Thread(target = calienta, args=(False))
     
     #Temperatura
     lblTemp = Label(raiz)
@@ -182,7 +165,7 @@ def simularInvernadero():
     lblTemp["text"] = "0°C"
 
     #Slider (Cambiar la temperatura medida)
-    sliderTemp = Scale(raiz, from_=-20, to=50, orient='horizontal', command = slider_changed)
+    sliderTemp = Scale(raiz, from_=-10, to=50, orient='horizontal', command = slider_changed)
     sliderTemp.set(25)
     sliderTemp.grid(row = 7, column = 3)
     ##########################
@@ -192,8 +175,9 @@ def simularInvernadero():
 #Permite actualizar el valor "medido" por el termometro
 #Realmente se coloca el valor directamente de ahí
 def slider_changed(value):
-    global lblTemp, temperatura, imgTerm, lblTerm_Img, raiz
+    global lblTemp, temperatura, imgTerm, lblTerm_Img, raiz, fondo
     temperatura = value
+    #La imagen se ajusta para una retroalimentación visual pequeña (No exacta visualmente)
     if int(temperatura) <= 0:
         imgTerm = ImageTk.PhotoImage(Image.open("Images/term1.png"))
     elif int(temperatura) <= 17:
@@ -204,38 +188,46 @@ def slider_changed(value):
         imgTerm = ImageTk.PhotoImage(Image.open("Images/term4.png"))
     text = str(value) + " °C"
     lblTerm_Img = Label(raiz, image = imgTerm)
+    lblTerm_Img.configure(bg=fondo)
     lblTerm_Img.grid(row = 5, column = 3)
-
     lblTemp["text"] = text
 
 
-#Prende o apaga el ventilador (activa-bool)
+#Prende o apaga el ventilador, maneja la potencia mostrada
 def ventila(potencia):
     #Variables: imgVent, lblVent_Img, lblPot_Vent, lblOnOff_Vent
     global activa_Vent #Variable que hace que se active o desactive (Para evitar 2 animaciones)
-    global raiz, lblPot_Vent, lblOnOff_Vent #Imagen y ventana
-    pot = int(potencia)
+    global raiz, lblPot_Vent, lblOnOff_Vent 
+    pot = float(potencia)
+    #Preparamos las nuevas etiquetas
     lblPot_Vent = Label(raiz)
     lblPot_Vent.grid(row = 2, column = 1)
     lblOnOff_Vent = Label(raiz)
     lblOnOff_Vent.grid(row = 3, column = 1)
     if potencia != '0':
-        activa_Vent = False #Para que mate a otra animación, si la hay
-        sleep(1) #Dar tiempo que se cancele la anterior animacion
+        #Cambiamos a la potencia actual
         lblPot_Vent["text"] = str(potencia) + "%"
         lblOnOff_Vent["text"] = "On"
+        #Matando la anterior animación
+        activa_Vent = False #Para que mate a otra animación, si la hay
+        sleep(0.2) #Máximo tiempo para que la anterior animación termine
+        #Iniciando la nueva animación
         activa_Vent = True
         hiloAnimacion = Thread(target = animacionVentilador, args=(pot,))
         hiloAnimacion.start()
     else:
+        #Si se apaga
         lblPot_Vent["text"] = "0%"
         lblOnOff_Vent["text"] = "Off"
         activa_Vent = False
 
+#La velocidad cambia con respecto a la potencia
 def animacionVentilador(pot):
-    global activa_Vent, imgActual_Vent, raiz, imgVent, lblVent_Img
+    global activa_Vent, imgActual_Vent, raiz, imgVent, lblVent_Img, fondo
     while activa_Vent:
-        lblVent_Img.grid_remove()
+        #Eliminamos la imagen anteriormente mostrada
+        #lblVent_Img.grid_remove()
+        #Dependiendo de donde se haya detenido el ventilador, mostrará la siguiente
         if imgActual_Vent == 0:
             imgVent = ImageTk.PhotoImage(Image.open("Images/ventilador1.png"))
             imgActual_Vent = imgActual_Vent + 1
@@ -245,20 +237,27 @@ def animacionVentilador(pot):
         elif imgActual_Vent == 2:
             imgVent = ImageTk.PhotoImage(Image.open("Images/ventilador3.png"))
             imgActual_Vent = 0
+        else:
+            imgVent = ImageTk.PhotoImage(Image.open("Images/ventilador1.png"))
         lblVent_Img = Label(raiz, image = imgVent)
+        lblVent_Img.configure(bg = fondo)
         lblVent_Img.grid(row = 1, column = 1)
-        sleep(0.1 + (1 -(pot/100)))
+        #Para simular movimientos diferentes, dependiendo de la potencia
+        sleep(0.05 + (0.1 -(pot/1000)))  #Original: 0.05 + (1-(pot/100)) - Animación lenta
+        lblVent_Img.grid_remove()
 
+#Elimina etiquetas anteriores para evitar la creación de muchos elementos
 def quitaVentilaAnt():
     global lblPot_Vent, lblOnOff_Vent
-    #mataVentiladorAnterior()
     lblPot_Vent.grid_remove()
     lblOnOff_Vent.grid_remove()
 
+#Enciende el foco y maneja la potencia del mismo
 def calienta(potencia):
-    global imgFoco, lblFoco_Img, lblPot_Foco, lblOnOff_Foco, raiz
-
-    pot = int(potencia)
+    global imgFoco, lblFoco_Img, lblPot_Foco, lblOnOff_Foco, raiz, fondo
+    #Ya que se recibe en cadena, debe cambiarse a un valor legible
+    pot = float(potencia)
+    #Se modificaran
     lblPot_Foco = Label(raiz)
     lblPot_Foco.grid(row = 2, column = 3)
     lblOnOff_Foco = Label(raiz)
@@ -283,21 +282,25 @@ def calienta(potencia):
         imgFoco = ImageTk.PhotoImage(Image.open("Images/foco5.png"))
 
     lblFoco_Img = Label(raiz, image = imgFoco)
+    lblFoco_Img.configure(bg = fondo)
     lblFoco_Img.grid(row = 1, column = 3)
     
-    #La potencia se puede poner siempre igual
+    #La potencia se puede poner siempre de esta manera
     lblPot_Foco["text"] = potencia + "%"
 
+#Elimina anteriores etiquetas para evitar la creación de múltiples elementos
 def quitaFoco():
     global lblFoco_Img, lblPot_Foco, lblOnOff_Foco
     lblFoco_Img.grid_remove()
     lblPot_Foco.grid_remove()
     lblOnOff_Foco.grid_remove()
 
+#Controla el encendido/apagado del aspersor
 def riega(estado):
-    global imgAsp, lblAsp_Img, lblOnOff_Asp, raiz
+    global imgAsp, lblAsp_Img, lblOnOff_Asp, raiz, fondo
     lblOnOff_Asp = Label(raiz)
     lblOnOff_Asp.grid(row = 6, column = 1)
+    #El estado se utiliza "on", pues es lo que nos pasa el servidor
     if estado == "on":
         lblOnOff_Asp["text"] = "On"
         imgAsp = ImageTk.PhotoImage(Image.open("Images/aspersor2.png"))
@@ -305,42 +308,16 @@ def riega(estado):
         lblOnOff_Asp["text"] = "Off"
         imgAsp = ImageTk.PhotoImage(Image.open("Images/aspersor1.png"))
     lblAsp_Img = Label(raiz, image = imgAsp)
+    lblAsp_Img.configure(bg = fondo)
     lblAsp_Img.grid(row = 5, column = 1)
 
+#Eliminea anteriores etiquetas para evitar la creación de múltiples elementos
 def quitaRiega():
     global lblAsp_Img, lblOnOff_Asp
     lblAsp_Img.grid_remove()
     lblOnOff_Asp.grid_remove()
 
-#Funcion de prueba (apagado remoto)
-def apagaEtiqueta(): 
-    etiqueta.grid_remove()
-
-#Devuelve temperatura actual
+#Devuelve temperatura actual (Función para retroalimentación)
 def temperaturaActual(temp):
     slider_changed(str(temp))
     return int(temperatura)
-
-#Prueba para crear animacion en tkinter
-def fingeMoverte():
-    x = True
-    global img,panel,raiz
-    while(True):
-        try:
-            if x:
-                print("Plantaaaaaa")
-                img = ImageTk.PhotoImage(Image.open("planta.png"))
-                panel = Label(raiz, image = img)
-                panel.grid(row = 2, column = 2)
-                x = False
-            else:
-                print("Perraaaa")
-                img = ImageTk.PhotoImage(Image.open("ventilador.gif"))
-                panel = Label(raiz, image = img)
-                panel.grid(row = 2, column = 2)
-                x = True
-        except:
-            break
-        print("llega?")
-        sleep(1)
-
