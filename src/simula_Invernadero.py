@@ -337,13 +337,11 @@ def fingeMoverte():
     while(True):
         try:
             if x:
-                print("Plantaaaaaa")
                 img = ImageTk.PhotoImage(Image.open("planta.png"))
                 panel = Label(raiz, image = img)
                 panel.grid(row = 2, column = 2)
                 x = False
             else:
-                print("Perraaaa")
                 img = ImageTk.PhotoImage(Image.open("ventilador.gif"))
                 panel = Label(raiz, image = img)
                 panel.grid(row = 2, column = 2)
