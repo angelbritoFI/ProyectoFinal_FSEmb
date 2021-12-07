@@ -14,9 +14,6 @@
 #Importación del simulador (comentar para una implementación física)
 from simula_Invernadero import *
 
-#Control de hilos para el simulador (comentar para una implementación física)
-from threading import Thread
-
 import smbus2 	#Lectura del puerto serial I2C
 import struct 	#Conversión de datos binarios a objetos que puede leer Python
 import time 	#Medición de tiempos
@@ -137,8 +134,7 @@ def ventilador(potencia):
 	print("Potencia del ventilador: ",potencia, "%", sep="")
 	#Comentar las siguientes líneas para implementación física
 	quitaVentilaAnt()
-	hiloVent = Thread(target = ventila, args=(potencia,))
-	hiloVent.start()
+	ventila(potencia)
 
 def mostrarGrafica(valor):
 	print("Imprimiendo gráfica")

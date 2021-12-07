@@ -33,12 +33,6 @@ imgAsp = None
 
 imgTerm = None
 
-#imagenes temporal
-img1 = "yellow.png"
-img2 = "white.png"
-img3 = "red.png"
-img4 = "blue.png"
-
 #Ventilador 
 activa_Vent = False
 imgActual_Vent = 0
@@ -217,55 +211,52 @@ def slider_changed(value):
 
 #Prende o apaga el ventilador (activa-bool)
 def ventila(potencia):
-    cuenta = 10 #Detendra la animacion pasado un tiempo
     #Variables: imgVent, lblVent_Img, lblPot_Vent, lblOnOff_Vent
-    global activa_Vent #Variable que hace que se active o desactive (Para evitar 2 activaciones)
-    global imgActual_Vent #Saber en que imagen vamos
-    cambio = True
-    global img1, img2, img3 #Imagenes del ventilador
-    global raiz, imgVent, lblVent_Img #Imagen y ventana
+    global activa_Vent #Variable que hace que se active o desactive (Para evitar 2 animaciones)
+    global raiz, lblPot_Vent, lblOnOff_Vent #Imagen y ventana
     pot = int(potencia)
     lblPot_Vent = Label(raiz)
     lblPot_Vent.grid(row = 2, column = 1)
     lblOnOff_Vent = Label(raiz)
     lblOnOff_Vent.grid(row = 3, column = 1)
     if potencia != '0':
+        activa_Vent = False #Para que mate a otra animación, si la hay
+        sleep(1) #Dar tiempo que se cancele la anterior animacion
         lblPot_Vent["text"] = str(potencia) + "%"
         lblOnOff_Vent["text"] = "On"
         activa_Vent = True
+        hiloAnimacion = Thread(target = animacionVentilador, args=(pot,))
+        hiloAnimacion.start()
     else:
         lblPot_Vent["text"] = "0%"
         lblOnOff_Vent["text"] = "Off"
         activa_Vent = False
-    while(activa_Vent): #Si se apago simplemente no reproducirá lo siguiente
-        if cuenta == 0:
-            break
-        try:
-            lblVent_Img.grid_remove()
-            if imgActual_Vent == 0:
-                imgVent = ImageTk.PhotoImage(Image.open("Images/ventilador1.png"))
-                imgActual_Vent = imgActual_Vent + 1
-            elif imgActual_Vent == 1:
-                imgVent = ImageTk.PhotoImage(Image.open("Images/ventilador2.png"))
-                imgActual_Vent = imgActual_Vent + 1
-            elif imgActual_Vent == 2:
-                imgVent = ImageTk.PhotoImage(Image.open("Images/ventilador3.png"))
-                imgActual_Vent = 0
-            lblVent_Img = Label(raiz, image = imgVent)
-            lblVent_Img.grid(row = 1, column = 1)
-            sleep(0.15 + (1 - (pot/100)) )
-            cuenta = cuenta - 1
-        except:
-            break
+
+def animacionVentilador(pot):
+    global activa_Vent, imgActual_Vent, raiz, imgVent, lblVent_Img
+    while activa_Vent:
+        lblVent_Img.grid_remove()
+        if imgActual_Vent == 0:
+            imgVent = ImageTk.PhotoImage(Image.open("Images/ventilador1.png"))
+            imgActual_Vent = imgActual_Vent + 1
+        elif imgActual_Vent == 1:
+            imgVent = ImageTk.PhotoImage(Image.open("Images/ventilador2.png"))
+            imgActual_Vent = imgActual_Vent + 1
+        elif imgActual_Vent == 2:
+            imgVent = ImageTk.PhotoImage(Image.open("Images/ventilador3.png"))
+            imgActual_Vent = 0
+        lblVent_Img = Label(raiz, image = imgVent)
+        lblVent_Img.grid(row = 1, column = 1)
+        sleep(0.1 + (1 -(pot/100)))
 
 def quitaVentilaAnt():
     global lblPot_Vent, lblOnOff_Vent
+    #mataVentiladorAnterior()
     lblPot_Vent.grid_remove()
     lblOnOff_Vent.grid_remove()
 
 def calienta(potencia):
     global imgFoco, lblFoco_Img, lblPot_Foco, lblOnOff_Foco, raiz
-    global img1, img2, img3, img4
 
     pot = int(potencia)
     lblPot_Foco = Label(raiz)
@@ -337,11 +328,13 @@ def fingeMoverte():
     while(True):
         try:
             if x:
+                print("Plantaaaaaa")
                 img = ImageTk.PhotoImage(Image.open("planta.png"))
                 panel = Label(raiz, image = img)
                 panel.grid(row = 2, column = 2)
                 x = False
             else:
+                print("Perraaaa")
                 img = ImageTk.PhotoImage(Image.open("ventilador.gif"))
                 panel = Label(raiz, image = img)
                 panel.grid(row = 2, column = 2)
