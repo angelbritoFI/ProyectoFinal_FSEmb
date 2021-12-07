@@ -189,6 +189,7 @@ def simularInvernadero():
 
     #Slider (Cambiar la temperatura medida)
     sliderTemp = Scale(raiz, from_=-20, to=50, orient='horizontal', command = slider_changed)
+    sliderTemp.set(25)
     sliderTemp.grid(row = 7, column = 3)
     ##########################
 
