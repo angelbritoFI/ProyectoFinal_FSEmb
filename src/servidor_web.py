@@ -59,11 +59,12 @@ class WebServer(BaseHTTPRequestHandler):
 			print("Datos JSON incorrectos")
 			return
 		funciones = {
-			'irrigacion' : irrigacion, 		#Sistema de Irrigación
-			'temperatura': temperatura,		#Control de temperatura
-			'radiador'	 : radiador, 		#Control de potencia del radiador
-			'ventilador' : ventilador,		#Control de potencia del ventilador
-			'graficacion': mostrarGrafica	#Desplegado de gráfica
+			'irrigacion' : irrigacion, #Sistema de Irrigación
+			'temperatura': temperatura,	#Control de temperatura
+			'radiador'	 : radiador, #Control de potencia del radiador
+			'ventilador' : ventilador, #Control de potencia del ventilador
+			'programacion': programaInvernadero, #Control de potencia del ventilador
+			'graficacion': mostrarGrafica #Desplegado de gráfica
 		}
 		accion = funciones.get(json_obj['action'])
 		if accion:

@@ -43,6 +43,8 @@ temp = 25 #Temperatura de inicio del invernadero
 humedo = False #Humedad del huerto
 tempA = 0
 
+automatico = False #Inicia sin programación de ciclos de temperatura e irrigado el programa
+
 #Constantes para controlador PID
 KP = 0.02 	#Constante para control proporcional
 KD = 0.01 	#Constante para control derivativo
@@ -143,6 +145,11 @@ def mostrarGrafica(valor):
 
 def iniciaControl():
 	simularInvernadero()
+
+#Programado de ciclos de temperatura e irrigado
+def programaInvernadero(entrada):
+	automatico = True
+	#0,2021-12-08,00:03,12:00
 
 #Resolución de 10 bits para el convertidor A/D
 def leerTemperatura():

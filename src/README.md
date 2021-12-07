@@ -32,7 +32,8 @@
 | -- | -- | -- |
 | 1.0 | Creando interfaz de usuario para irrigación | 20/11/21 |
 | 1.1 | Agregando botones para controlar potencias | 01/12/21 |
-| 1. |  |  |
+| 1.2 | Terminando botones y mensajes para control de invernadero | 02/12/21 |
+| 1.3 | Agregando sección para programado de ciclos de temperatura e irrigado | 05/12/21 |
 
 ## Código estilos.css
 | Versión | Descripción | Fecha |

@@ -8,6 +8,7 @@
 	Date: 20/11/2021
 	Description: Funciones para controlar el envío de datos
 */
+//Función para controlar el envío de acciones al programa de Python
 function handle(sender, action, value){
 	if (sender.id == 'irrigacionON' || sender.id == 'irrigacionOFF')	
 		irrigacion(action, value);
@@ -16,6 +17,7 @@ function handle(sender, action, value){
 	}
 }
 
+//Control del sistema de Irrigación
 function irrigacion(funcion, estado) {
 	submit(funcion, estado);
 	notificacion = document.getElementById("sistema_irr");
@@ -31,10 +33,11 @@ function irrigacion(funcion, estado) {
 	}
 }
 
+//Función para validar el envío de números al programa de Python
 function validaEnvio(funcion, etiqueta) {
 	valor = document.getElementById(funcion).value;
 	notifica = document.getElementById(etiqueta);
-    if (valor < 0) {
+    if (valor < 0 && funcion != 'temperatura') {
     	alert("Debes de introducir un número positivo");
     } else {
     	if (isNaN(valor) || valor === "") {
@@ -46,6 +49,26 @@ function validaEnvio(funcion, etiqueta) {
     }
 }
 
+//Función para programar ciclos de temperatura e irrigado
+function ciclosTempIrr(funcion) {
+	temperatura = document.getElementById('tempProg').value;
+	fecha = document.getElementById('fecha').value;
+	iniciar = document.getElementById('t_inicio').value;
+	terminar = document.getElementById('t_fin').value;
+	notifica = document.getElementById('programado');
+	if (isNaN(temperatura) || temperatura === "") {
+  		alert("Debes de introducir un número");
+	} else if (fecha === "" || iniciar === "" || terminar === "") {
+		alert("Introduce todos los campos solicitados");
+	} else {
+		var valor = temperatura + "," + fecha + "," + iniciar + "," + terminar
+		notifica.innerText = "Ciclo de temperatura e irrigado programado para " + fecha 
+			+ " desde " + iniciar + " hasta " + terminar
+		submit(funcion, valor);
+	}
+}
+
+//Enviar los datos con el método POST al programa de Python
 function submit(action, value){
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", window.location.href, true);

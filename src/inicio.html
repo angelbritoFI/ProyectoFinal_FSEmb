@@ -11,7 +11,7 @@
 	<meta name="authors" content="Brito Segura Angel, Tovar Herrera Carlos Eduardo 
 		& Zazueta Barajas Sebastián Pedro">
 	<meta name="description" content="Página principal del control remoto de invernadero">
-	<meta name="keywords" content="HTML5, proyecto final, sistema, embebido">
+	<meta name="keywords" content="HTML5, proyecto final, invernadero, sistema embebido">
 	<link rel="shortcut icon" href="icono.png"> <!--Icono diseñado por Freepik en www.flaticon.es-->
 	<link rel="stylesheet" type="text/css" href="estilos.css">
 </head>
@@ -66,9 +66,19 @@
 		  <img src="Images/ventilador1.png" width = "150" height = "150">
 		</div>
 	</div>
-			
 	<br>
-	<button onclick="submit('graficacion', 0)">Mostrar gráfica</button>
+	<center><button onclick="submit('graficacion', 0)">Mostrar gráfica</button></center>
+	<br>
+	<h2>Programación de ciclos de temperatura e irrigado</h2>
+	<div>
+		<p>Introduce la temperatura deseada para el invernadero:
+			<input type="number" id="tempProg" min="0" value="0"></p>
+		<p>Selecciona fecha para la irrigación: <input type="date" id="fecha" required></p>
+		<p>Hora de inicio (formato de 24 horas): <input type="time" id="t_inicio" required></p>
+		<p>Hora de término (formato de 24 horas): <input type="time" id="t_fin" required></p>
+		<button onclick="ciclosTempIrr('programacion')">Programar</button>
+		<p id="programado"></p>
+	</div>
 	<script src="funciones.js"></script>
 </body>
 </html>
