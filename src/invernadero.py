@@ -16,7 +16,7 @@ from simula_Invernadero import *
 
 import smbus2 	#Lectura del puerto serial I2C
 import struct 	#Conversión de datos binarios a objetos que puede leer Python
-import time 	#Medición de tiempos
+from datetime import datetime	#Obtener fecha y hora actual del sistema
 
 #Configuraciones de la librería RPi.GPIO (descomentar para implementación física)
 #GPIO.setwarnings(False) # Desactiviar advertencias
@@ -38,17 +38,17 @@ i2c = smbus2.SMBus(1)
 
 temp = 25 #Temperatura de inicio del invernadero
 humedo = False #Humedad del huerto
-tempA = 0
+tempA = error_previo = suma_errores = tempC = 0
 
-automatico = False #Inicia sin programación de ciclos de temperatura e irrigado el programa
+#Arreglos para almacenar las variables para el programado de ciclos
+fecha_programada = []
+horaInicio = []
+horaTermino = []
 
 #Constantes para controlador PID
 KP = 0.02 	#Constante para control proporcional
 KD = 0.01 	#Constante para control derivativo
 KI = 0.005	#Constante para control integral
-
-error_previo = 0
-suma_errores = 0
 
 #Sistema de Irrigación
 def irrigacion(estado):
@@ -142,11 +142,24 @@ def mostrarGrafica(valor):
 def iniciaControl():
 	simularInvernadero()
 
-#Programado de ciclos de temperatura e irrigado
+# Función para obtener los datos del usuario de la página web
 def programaInvernadero(entrada):
-	automatico = True
 	#0,2021-12-08,00:03,12:00
+	global tempC, fecha_programada, horaInicio, horaTermino
+	datos = entrada.split(",")	
+	tempC = int(datos[0])
 
+	fecha = datos[1].split("-")
+	#Acomodar arreglo de cadenas a enteros
+	for i in range(2,-1,-1):
+		fecha_programada.append(int(fecha[i]))
+
+	hora_inicio = datos[2].split(":")
+	hora_fin = datos[3].split(":")
+	for i in range(2):
+		horaInicio.append(int(hora_inicio[i]))
+		horaTermino.append(int(hora_fin[i]))
+	
 #Resolución de 10 bits para el convertidor A/D
 def leerTemperatura():
 	global temp
@@ -179,3 +192,11 @@ def registrarHumedad():
 			humedo = True
 		else:
 			humedo = False
+
+#Programado de ciclos de temperatura e irrigado
+def ciclosTempIrr():
+	while True:
+		Ahora = datetime.now()
+		if len(fecha_programada) == 3:
+			print(fecha_programada, horaInicio, horaTermino)
+		#print(ahora.year, ahora.month, ahora.day, ahora.hour, ahora.minute, ahora.second)

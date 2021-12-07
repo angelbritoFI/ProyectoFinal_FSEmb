@@ -147,8 +147,10 @@ def main():
 	try:
 		hilo1 = Thread(target=server)
 		hilo2 = Thread(target=iniciaControl) #Comentar si es una implementación física
+		hilo3 = Thread(target=ciclosTempIrr)
 		hilo1.start()
 		hilo2.start() #Comentar si es una implementación física
+		hilo3.start()
 		""" Descomentar si es una implementación física
 		# Control de sensores a través de hilos
 		sensor1 = Thread(target=leerTemperatura)
