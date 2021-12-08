@@ -226,7 +226,7 @@ def animacionVentilador(pot):
     global activa_Vent, imgActual_Vent, raiz, imgVent, lblVent_Img, fondo
     while activa_Vent:
         #Eliminamos la imagen anteriormente mostrada
-        #lblVent_Img.grid_remove()
+        lblVent_Img.grid_remove()
         #Dependiendo de donde se haya detenido el ventilador, mostrará la siguiente
         if imgActual_Vent == 0:
             imgVent = ImageTk.PhotoImage(Image.open("Images/ventilador1.png"))
@@ -244,7 +244,7 @@ def animacionVentilador(pot):
         lblVent_Img.grid(row = 1, column = 1)
         #Para simular movimientos diferentes, dependiendo de la potencia
         sleep(0.05 + (0.1 -(pot/1000)))  #Original: 0.05 + (1-(pot/100)) - Animación lenta
-        lblVent_Img.grid_remove()
+        #lblVent_Img.grid_remove()
 
 #Elimina etiquetas anteriores para evitar la creación de muchos elementos
 def quitaVentilaAnt():
