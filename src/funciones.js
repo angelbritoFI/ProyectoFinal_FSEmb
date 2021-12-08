@@ -8,7 +8,6 @@
 	Date: 20/11/2021
 	Description: Funciones para controlar el envío de datos
 */
-var hoy = new Date();
 //Función para controlar el envío de acciones del sistema de irrigacion
 function handle(sender, action, value){
 	if (sender.id == 'irrigacionON' || sender.id == 'irrigacionOFF')	
@@ -144,11 +143,12 @@ etiquetasTemperatura = ["Inicial"]
 datosTemperatura = [25]
 //Funcion para crear grafica
 function graficaTemperatura(valor){
+	var hoy = new Date();
 	const $grafica = document.querySelector("#temp_grafica");
 	// Las etiquetas son las que van en el eje X. 
 	notifica = document.getElementById('estado_temperatura');
 	notifica.innerText = valor 
-	
+
 	var horas = hoy.getHours() + ':' + hoy.getMinutes() + ':' + hoy.getSeconds();
 	var dias = hoy.getDate() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getYear();
 	horaCambio = horas + "  " +dias
