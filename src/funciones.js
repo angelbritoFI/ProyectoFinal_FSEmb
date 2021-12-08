@@ -8,6 +8,7 @@
 	Date: 20/11/2021
 	Description: Funciones para controlar el envío de datos
 */
+var hoy = new Date();
 //Función para controlar el envío de acciones del sistema de irrigacion
 function handle(sender, action, value){
 	if (sender.id == 'irrigacionON' || sender.id == 'irrigacionOFF')	
@@ -51,6 +52,7 @@ function validaEnvio(funcion, etiqueta) {
 				valor  = valor
 			}
 			submit(funcion, valor);
+			graficaTemperatura(valor);
 			muestraImagenes(funcion, valor);
 			notifica.innerText = valor
 		}        
@@ -101,6 +103,8 @@ function muestraImagenes(funcion, valor){
 	document.getElementById('imagenFoco').innerHTML = imagen;
 		imagen = '<center><img src="Images/ventilador1.png" width = "130" height = "130" /></center>'
 	document.getElementById('imagenVentilador').innerHTML = imagen;
+	imagen = '<center><img src="Images/aspersor1.png" width = "150" height = "150" /></center>'
+			document.getElementById('imagenIrrigacion').innerHTML = imagen;
 
 	}
 	
@@ -134,4 +138,48 @@ function submit(action, value){
 		'action' : action,
 		'value' :  value,
 	}));
+}
+
+etiquetasTemperatura = ["Inicial"]
+datosTemperatura = [25]
+//Funcion para crear grafica
+function graficaTemperatura(valor){
+	const $grafica = document.querySelector("#temp_grafica");
+	// Las etiquetas son las que van en el eje X. 
+	notifica = document.getElementById('estado_temperatura');
+	notifica.innerText = valor 
+	
+	var horas = hoy.getHours() + ':' + hoy.getMinutes() + ':' + hoy.getSeconds();
+	var dias = hoy.getDate() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getYear();
+	horaCambio = horas + "  " +dias
+	
+	etiquetasTemperatura.push(horaCambio)
+	datosTemperatura.push(valor)
+	//Podemos tener varios conjuntos de datos. Comencemos con uno
+	const datosTemp = {
+		label: "Temperatura",
+		data: datosTemperatura, // La data es un arreglo que debe tener la misma cantidad de valores que la cantidad de etiquetas
+		backgroundColor: 'rgba(54, 162, 235, 0.2)', // Color de fondo
+		borderColor: 'rgba(54, 162, 235, 1)', // Color del borde
+		borderWidth: 1,// Ancho del borde
+	};
+	new Chart($grafica, {
+		type: 'line',// Tipo de gráfica
+		data: {
+			labels: etiquetasTemperatura,
+			datasets: [
+				datosTemp,
+				// Aquí más datos...
+			]
+		},
+		options: {
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero: true
+					}
+				}],
+			},
+		}
+	});
 }

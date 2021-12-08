@@ -16,6 +16,15 @@ h1 {
  	font-size: 36px;
  	text-align: center;
 }
+h2 {
+	color: #801810; 
+	font-family: Helvetica, Arial, sans-serif; 
+	margin-left: 120px;
+	margin-right: 120px;
+	background-color: hsla(0, 24%, 93%, 0.767);
+	font-size: 36px;
+	text-align: center;
+}
 
 #contenedorIrrigacion {
 	display: flex;
@@ -97,3 +106,20 @@ h1 {
 	width: 33%;
   }
 
+.grafica{
+	margin-left: 120px; 
+	height: 550px;
+	width: 1000px;
+	background-color: rgb(255, 255, 255);
+	vertical-align: middle;
+	top: 50%;
+	text-align: center;
+}
+#contenedorGrafica {
+	margin-left: 200px;
+	margin-right: 250px; 
+	background-color: rgb(255, 255, 255);    
+	vertical-align: middle;
+	text-align: center;
+  }
+  
