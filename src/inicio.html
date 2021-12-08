@@ -56,7 +56,7 @@
 		<div>
 			<p>Introduce la potencia del radiador:
 				<input type="number" id="radiador" min="0" value="0">
-				<button onclick="handle(this, 'radiador', 'estado_rad')">Enviar potencia</button>
+			<center><button onclick="handle(this, 'radiador', 'estado_rad')">Enviar potencia</button></center>
 			</p>
 			<center> Potencia radiador: <span id="estado_rad">0</span>% </center>
 		</div>
@@ -74,7 +74,7 @@
 		<div>
 			<p>Introduce la potencia del ventilador:
 				<input type="number" id="ventilador" min="0" value="0">
-				<button onclick="handle(this, 'ventilador', 'estado_vent')">Enviar</button>
+				<center><button onclick="handle(this, 'ventilador', 'estado_vent')">Enviar</button></center>
 			</p>
 			<center> Potencia ventilador: <span id="estado_vent">0</span>%</center>	
 		</div>
@@ -82,15 +82,26 @@
 	</div>
 	<br>
 	<h2>Registro grafico de cambios</h2>
-	</div>
 	<div id ='contenedorGrafica'>
 		<div class ='grafica'>
 			<h3> Gráfica de cambios en la Temperatura</h3>
 			<center><canvas id="temp_grafica"></canvas></center>
 		</div>
+		<div class ='grafica'>
+			<h3> Gráfica de cambios en radiador</h3>
+			<center><canvas id="foco_grafica"></canvas></center>
+		</div>	
 	</div>
-	<p id="horaCambio"></p>
-	
+	<div id ='contenedorGrafica'>
+		<div class ='grafica'>
+			<h3> Gráfica de cambios en sistema de irrigación</h3>
+			<center><canvas id="irrig_grafica"></canvas></center>
+		</div>
+		<div class ='grafica'>
+			<h3> Gráfica de cambios en ventilación</h3>
+			<center><canvas id="vent_grafica"></canvas></center>
+		</div>	
+	</div>
 	
 	
 	

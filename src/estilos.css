@@ -106,20 +106,35 @@ h2 {
 	width: 33%;
   }
 
-.grafica{
-	margin-left: 120px; 
-	height: 550px;
-	width: 1000px;
-	background-color: rgb(255, 255, 255);
-	vertical-align: middle;
-	top: 50%;
-	text-align: center;
-}
 #contenedorGrafica {
-	margin-left: 200px;
-	margin-right: 250px; 
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	margin-left: 120px;
+	margin-right: 120px; 
 	background-color: rgb(255, 255, 255);    
 	vertical-align: middle;
 	text-align: center;
   }
-  
+#contenedorGrafica > div {
+	width: 40%;
+  }
+.grafica{
+	margin-left: 120px; 
+	height: 450px;
+	width: 800px;
+	background-color: rgb(255, 255, 255);
+	vertical-align: middle;
+	top: 50%;
+	text-align: center;
+} 
+
+.prueba{
+	margin-left: 120px; 
+	height: 420px;
+	width: 800px;
+	background-color: rgba(226, 158, 55, 0.795);
+	vertical-align: middle;
+	top: 50%;
+	text-align: center;
+} 

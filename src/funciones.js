@@ -20,6 +20,7 @@ function handle(sender, action, value){
 //Control del sistema de Irrigación
 function irrigacion(funcion, estado) {
 	submit(funcion, estado);
+	graficaIrrigacion(estado)
 	notificacion = document.getElementById("sistema_irr");
 	if (estado == 'on') {
 		notificacion.innerText = "Sistema de irrigación enciendose";
@@ -50,8 +51,10 @@ function validaEnvio(funcion, etiqueta) {
 			else{
 				valor  = valor
 			}
+			if (funcion == "temperatura"){
+				graficaTemperatura(valor);
+			}
 			submit(funcion, valor);
-			graficaTemperatura(valor);
 			muestraImagenes(funcion, valor);
 			notifica.innerText = valor
 		}        
@@ -61,6 +64,7 @@ function validaEnvio(funcion, etiqueta) {
 //Muestra las imagenes correspondientes a la potencia del radiador
 function muestraImagenes(funcion, valor){
 	if (funcion == 'radiador'){
+		graficaRadiador(valor);
 		if (valor<= 20){
 			imagen = '<center><img src="Images/foco1.png" width = "130" height = "130" /></center>'
 	document.getElementById('imagenFoco').innerHTML = imagen;
@@ -84,6 +88,7 @@ function muestraImagenes(funcion, valor){
 	}
 	
 	else if (funcion == 'ventilador'){
+		graficaVentilacion(valor)
 		if (valor<= 33){
 			imagen = '<center><img src="Images/ventilador1.png" width = "130" height = "130" /></center>'
 	document.getElementById('imagenVentilador').innerHTML = imagen;
@@ -141,7 +146,7 @@ function submit(action, value){
 
 etiquetasTemperatura = ["Inicial"]
 datosTemperatura = [25]
-//Funcion para crear grafica
+//Funcion para crear grafica de temperatura
 function graficaTemperatura(valor){
 	var hoy = new Date();
 	const $grafica = document.querySelector("#temp_grafica");
@@ -170,6 +175,136 @@ function graficaTemperatura(valor){
 			datasets: [
 				datosTemp,
 				// Aquí más datos...
+			]
+		},
+		options: {
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero: true
+					}
+				}],
+			},
+		}
+	});
+}
+
+etiquetasRadiador = ["Inicial"]
+datosRadiador = [0]
+//Funcion para crear grafica de radiador
+function graficaRadiador(valor){
+	var hoy = new Date();
+	const $grafica = document.querySelector("#foco_grafica");
+
+	var horas = hoy.getHours() + ':' + hoy.getMinutes() + ':' + hoy.getSeconds();
+	var dias = hoy.getDate() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getYear();
+	horaCambio = horas + "  " +dias
+	
+	etiquetasRadiador.push(horaCambio)
+	datosRadiador.push(valor)
+
+	const datosRad = {
+		label: "Potencia Radiador",
+		data: datosRadiador, // La data es un arreglo debe tener la misma cantidad de valores que la cantidad de etiquetas
+		backgroundColor: 'rgba(154, 162, 235, 0.2)', // Color de fondo
+		borderColor: 'rgba(154, 162, 235, 1)', // Color del borde
+		borderWidth: 1,// Ancho del borde
+	};
+	new Chart($grafica, {
+		type: 'line',// Tipo de gráfica
+		data: {
+			labels: etiquetasRadiador,
+			datasets: [
+				datosRad,
+			]
+		},
+		options: {
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero: true
+					}
+				}],
+			},
+		}
+	});
+}
+
+//**GRAFICA PARA IRRIGACIÓN */
+etiquetasIrrigacion = ["Inicial"]
+datosIrrigacion  = [0]
+//Funcion para crear grafica de irrigación
+function graficaIrrigacion(valor){
+	var hoy = new Date();
+	const $grafica = document.querySelector("#irrig_grafica");
+	if (valor == 'on'){
+		datosIrrigacion.push(100);
+	}
+	else{
+		datosIrrigacion.push(0);
+	}
+	
+	var horas = hoy.getHours() + ':' + hoy.getMinutes() + ':' + hoy.getSeconds();
+	var dias = hoy.getDate() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getYear();
+	horaCambio = horas + "  " +dias
+	
+	etiquetasIrrigacion.push(horaCambio)
+
+	const datosIrrg = {
+		label: "Activacion de Irrigado",
+		data: datosIrrigacion, // La data es un arreglo debe tener la misma cantidad de valores que la cantidad de etiquetas
+		backgroundColor: 'rgba(100, 62, 135, 0.2)', // Color de fondo
+		borderColor: 'rgba(100, 62, 135, 1)', // Color del borde
+		borderWidth: 1,// Ancho del borde
+	};
+	new Chart($grafica, {
+		type: 'bar',// Tipo de gráfica
+		data: {
+			labels: etiquetasIrrigacion,
+			datasets: [
+				datosIrrg,
+			]
+		},
+		options: {
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero: true
+					}
+				}],
+			},
+		}
+	});
+}
+
+//**GRAFICA PARA ventilación */
+etiquetasVentilacion = ["Inicial"]
+datosVentilacion  = [0]
+//Funcion para crear grafica de ventilación
+function graficaVentilacion(valor){
+	var hoy = new Date();
+	const $grafica = document.querySelector("#vent_grafica");
+	
+	var horas = hoy.getHours() + ':' + hoy.getMinutes() + ':' + hoy.getSeconds();
+	var dias = hoy.getDate() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getYear();
+	horaCambio = horas + "  " +dias
+	
+	etiquetasVentilacion.push(horaCambio)
+	datosVentilacion.push(valor)
+
+	const datosVent = {
+		label: "Potencia de ventilador",
+		data: datosVentilacion, // La data es un arreglo debe tener la misma cantidad de valores que la cantidad de etiquetas
+		backgroundColor: 'rgba(184, 12, 35, 0.2)', // Color de fondo
+		borderColor: 'rgba(184, 12, 35, 1)', // Color del borde
+		borderWidth: 1,// Ancho del borde
+	};
+	new Chart($grafica, {
+		type: 'line',// Tipo de gráfica
+		data: {
+			labels: etiquetasVentilacion,
+			datasets: [
+				datosVent,
 			]
 		},
 		options: {
