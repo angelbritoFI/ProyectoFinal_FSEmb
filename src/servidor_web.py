@@ -25,8 +25,8 @@ from threading import Thread
 #import RPi.GPIO as GPIO #Descomentar para una implementación física
 
 # Nombre o dirección IP del sistema anfitrión del servidor web
-address = "localhost"
-# address = "192.168.1.254"
+# address = "localhost" #Pruebas locales
+address = "192.168.1.254" #IP asignada en la configuración de la tarjeta controladora
 # Puerto en el cual el servidor estará atendiendo solicitudes HTTP
 # El default de un servidor web en producción debe ser 80
 port = 8080
