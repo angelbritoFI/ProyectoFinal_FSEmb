@@ -4,10 +4,24 @@
 	 	Tovar Herrera Carlos Eduardo
 		Zazueta Barajas Sebastián Pedro
 	License: MIT
-	Version 1.0
-	Date: 20/11/2021
-	Description: Funciones para controlar el envío de datos
+	Version 1.3
+	Date: 07/12/2021
+	Description: Funciones para controlar el envío de datos a servidor
 */
+// Variables para la creación de gráficas
+/**GRÁFICA PARA TEMPERATURA**/
+etiquetasTemperatura = ["Inicial"]
+datosTemperatura = [25]
+/**GRÁFICA PARA RADIADOR**/
+etiquetasRadiador = ["Inicial"]
+datosRadiador = [0]
+/**GRÁFICA PARA IRRIGACIÓN**/
+etiquetasIrrigacion = ["Inicial"]
+datosIrrigacion  = [0]
+//**GRAFICA PARA VENTILACIÓN**/
+etiquetasVentilacion = ["Inicial"]
+datosVentilacion  = [0]
+
 //Función para controlar el envío de acciones del sistema de irrigacion
 function handle(sender, action, value){
 	if (sender.id == 'irrigacionON' || sender.id == 'irrigacionOFF')	
@@ -17,13 +31,13 @@ function handle(sender, action, value){
 	}
 }
 
-//Control del sistema de Irrigación
+//Control del Sistema de Irrigación
 function irrigacion(funcion, estado) {
 	submit(funcion, estado);
 	graficaIrrigacion(estado)
 	notificacion = document.getElementById("sistema_irr");
 	if (estado == 'on') {
-		notificacion.innerText = "Sistema de irrigación enciendose";
+		notificacion.innerText = "Sistema de irrigación encendido";
 		imagen = '<center><img src="Images/aspersor2.png" width = "150" height = "150" /></center>'
 			document.getElementById('imagenIrrigacion').innerHTML = imagen;
 		
@@ -34,8 +48,7 @@ function irrigacion(funcion, estado) {
 	}
 }
 
-
-//Función para validar el envío de números al programa de Python y mostra
+//Función para validar el envío de números al programa de Python y mostrar imágenes correspondientes
 function validaEnvio(funcion, etiqueta) {
 	valor = document.getElementById(funcion).value;
 	notifica = document.getElementById(etiqueta);
@@ -61,7 +74,7 @@ function validaEnvio(funcion, etiqueta) {
     }
 }
 
-//Muestra las imagenes correspondientes a la potencia del radiador
+//Muestra las imágenes correspondientes a la acción que el usuario envía al servidor web
 function muestraImagenes(funcion, valor){
 	if (funcion == 'radiador'){
 		graficaRadiador(valor);
@@ -86,7 +99,7 @@ function muestraImagenes(funcion, valor){
 	document.getElementById('imagenFoco').innerHTML = imagen;
 		}
 	}
-	
+
 	else if (funcion == 'ventilador'){
 		graficaVentilacion(valor)
 		if (valor<= 33){
@@ -102,6 +115,7 @@ function muestraImagenes(funcion, valor){
 	document.getElementById('imagenVentilador').innerHTML = imagen;
 		}
 	}
+
 	else{
 		imagen = '<center><img src="Images/foco1.png" width = "130" height = "130" /></center>'
 	document.getElementById('imagenFoco').innerHTML = imagen;
@@ -109,9 +123,7 @@ function muestraImagenes(funcion, valor){
 	document.getElementById('imagenVentilador').innerHTML = imagen;
 	imagen = '<center><img src="Images/aspersor1.png" width = "150" height = "150" /></center>'
 			document.getElementById('imagenIrrigacion').innerHTML = imagen;
-
-	}
-	
+	}	
 }
 
 //Función para programar ciclos de temperatura e irrigado
@@ -144,9 +156,7 @@ function submit(action, value){
 	}));
 }
 
-etiquetasTemperatura = ["Inicial"]
-datosTemperatura = [25]
-//Funcion para crear grafica de temperatura
+//Función para crear gráfica de temperatura
 function graficaTemperatura(valor){
 	var hoy = new Date();
 	const $grafica = document.querySelector("#temp_grafica");
@@ -160,7 +170,7 @@ function graficaTemperatura(valor){
 	
 	etiquetasTemperatura.push(horaCambio)
 	datosTemperatura.push(valor)
-	//Podemos tener varios conjuntos de datos. Comencemos con uno
+	//Podemos tener varios conjuntos de datos, en este caso solo uno
 	const datosTemp = {
 		label: "Temperatura",
 		data: datosTemperatura, // La data es un arreglo que debe tener la misma cantidad de valores que la cantidad de etiquetas
@@ -174,7 +184,6 @@ function graficaTemperatura(valor){
 			labels: etiquetasTemperatura,
 			datasets: [
 				datosTemp,
-				// Aquí más datos...
 			]
 		},
 		options: {
@@ -189,9 +198,7 @@ function graficaTemperatura(valor){
 	});
 }
 
-etiquetasRadiador = ["Inicial"]
-datosRadiador = [0]
-//Funcion para crear grafica de radiador
+//Función para crear gráfica de radiador
 function graficaRadiador(valor){
 	var hoy = new Date();
 	const $grafica = document.querySelector("#foco_grafica");
@@ -230,10 +237,7 @@ function graficaRadiador(valor){
 	});
 }
 
-//**GRAFICA PARA IRRIGACIÓN */
-etiquetasIrrigacion = ["Inicial"]
-datosIrrigacion  = [0]
-//Funcion para crear grafica de irrigación
+//Función para crear gráfica de irrigación
 function graficaIrrigacion(valor){
 	var hoy = new Date();
 	const $grafica = document.querySelector("#irrig_grafica");
@@ -277,10 +281,7 @@ function graficaIrrigacion(valor){
 	});
 }
 
-//**GRAFICA PARA ventilación */
-etiquetasVentilacion = ["Inicial"]
-datosVentilacion  = [0]
-//Funcion para crear grafica de ventilación
+//Función para crear gráfica de ventilación
 function graficaVentilacion(valor){
 	var hoy = new Date();
 	const $grafica = document.querySelector("#vent_grafica");

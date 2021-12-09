@@ -2,19 +2,19 @@
 <html lang="es-MX">
 <!--
 	License: MIT
-	Version 1.0
-	Date: 20/11/2021
+	Version 1.5
+	Date: 07/12/2021
 -->
 <head>
 	<meta charset="utf-8">
 	<title>Invernadero</title>
 	<meta name="authors" content="Brito Segura Angel, Tovar Herrera Carlos Eduardo 
 		& Zazueta Barajas Sebastián Pedro">
-	<meta name="description" content="Página principal del control remoto de invernadero">
+	<meta name="description" content="Página web para llevar un control remoto de invernadero">
 	<meta name="keywords" content="HTML5, proyecto final, invernadero, sistema embebido">
 	<link rel="shortcut icon" href="icono.png"> <!--Icono diseñado por Freepik en www.flaticon.es-->
 	<link rel="stylesheet" type="text/css" href="estilos.css">
-	<script src="Chart.min.js"></script><!--Librería en líea para gráficas-->
+	<script src="Chart.min.js"></script> <!--Librería en línea para hacer gráficas-->
 </head>
 <body>
 	<h1>Control de Invernadero</h1>
@@ -46,10 +46,9 @@
 			Introduce la temperatura deseada para el invernadero:
 				<center><input type="number" id="tempProg" min="0" value="0"> </center>
 			<p>Selecciona fecha para la irrigación: <input type="date" id="fecha" required></p>
-			<p>Hora de inicio (formato de 24 horas): <input type="time" id="t_inicio" required></p>
-			<p>Hora de término (formato de 24 horas): <input type="time" id="t_fin" required></p>
-		</div>
-		
+			<p>Hora de inicio: <input type="time" id="t_inicio" required></p>
+			<p>Hora de término: <input type="time" id="t_fin" required></p>
+		</div>		
 	</div>
 	<br>
 	<div id="contenedorRadiador">
@@ -65,8 +64,7 @@
 			<br>
 			<center><button onclick="ciclosTempIrr('programacion')">Programar</button>
 				<p id="programado"></p>
-			</center>
-			
+			</center>			
 		</div>
 	</div>
 	<br>
@@ -81,7 +79,7 @@
 		<div id = 'imagenVentilador'> </div>
 	</div>
 	<br>
-	<h2>Registro grafico de cambios</h2>
+	<h2>Registro gráfico de cambios</h2>
 	<div id ='contenedorGrafica'>
 		<div class ='grafica'>
 			<h3> Gráfica de cambios en la Temperatura</h3>
@@ -102,9 +100,7 @@
 			<center><canvas id="vent_grafica"></canvas></center>
 		</div>	
 	</div>
-	
-	
-	
+		
 	<script src="funciones.js"></script>
 </body>
 </html>
